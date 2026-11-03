@@ -26,16 +26,21 @@ function cur(k){return k===PAGE?' aria-current="page"':''}
 var hdr=document.createElement('header');hdr.className='top';
 hdr.innerHTML='<div class="gut max"><div class="bar">'+
   '<a class="logo dt" href="'+R+'index.html" aria-label="Downtown Studio, accueil"><img src="'+R+'img/logo-downtown.svg" alt="Downtown Studio"></a>'+
-  '<nav class="links" aria-label="Navigation principale">'+MAIN.map(function(m){return '<a href="'+R+m[0]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+'</nav>'+
-  '<nav class="subnav" aria-label="Navigation secondaire">'+SEC.map(function(m){return '<a class="hide-m" href="'+R+m[0]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+
+  '<nav class="links" aria-label="Navigation principale">'+MAIN.map(function(m){return '<a href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+'</nav>'+
+  '<nav class="subnav" aria-label="Navigation secondaire">'+SEC.map(function(m){return '<a class="hide-m" href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+
   '<a class="lang" href="#" data-later="Version anglaise · plus tard" title="Version anglaise prévue plus tard"><b>FR</b> / EN</a>'+
   '<a class="member" href="https://access.downtownstudio.ch" target="_blank" rel="noopener">Espace membres ↗</a></nav>'+
   '<button class="menu-btn" id="menuOpen" type="button" aria-expanded="false" aria-controls="overlay">Menu <i></i></button>'+
-  '</div><div class="tcbar" id="tcbar" aria-label="Chapitres"><div class="tc-now" id="tcNow"></div><div class="tc-track" id="tcTrack"><div class="tc-head" id="tcHead"></div></div><div class="tc-code" id="tcCode">00:00:00:00</div></div></div>';
+  '</div><div class="mega" id="mega" hidden></div><div class="tcbar" id="tcbar" aria-label="Chapitres"><div class="tc-now" id="tcNow"></div><div class="tc-track" id="tcTrack"><div class="tc-head" id="tcHead"></div></div><div class="tc-code" id="tcCode">00:00:00:00</div></div></div>';
 document.body.insertBefore(hdr,document.body.querySelector('main'));
 var ov=document.createElement('div');ov.className='overlay gut';ov.id='overlay';ov.hidden=true;
+var MENU=window.DT_MENU||{};
+function href(h){return /^https?:/.test(h)?h:R+h}
+function ext(h){return /^https?:/.test(h)?' target="_blank" rel="noopener"':''}
 ov.innerHTML='<button class="menu-btn close" id="menuClose" type="button" style="display:inline-flex">Fermer</button>'+
-  MAIN.map(function(m){return '<a href="'+R+m[0]+'">'+m[1]+'</a>'}).join('')+
+  MAIN.map(function(m){var d=MENU[m[2]];if(!d)return '<a href="'+R+m[0]+'">'+m[1]+'</a>';
+    return '<details class="ov-sec"><summary>'+m[1]+'</summary><div class="ov-body"><a class="ov-top" href="'+R+m[0]+'">Voir la page '+m[1]+' →</a>'+
+      d.groups.map(function(g){return '<div class="ov-g"><span class="lab dim">'+g[0]+'</span>'+g[1].map(function(l){return '<a href="'+href(l[1])+'"'+ext(l[1])+'>'+l[0]+'</a>'}).join('')+'</div>'}).join('')+'</div></details>'}).join('')+
   '<div class="sec-o">'+SEC.map(function(m){return '<a href="'+R+m[0]+'">'+m[1]+'</a>'}).join('')+'<a href="https://access.downtownstudio.ch">Espace membres ↗</a></div>';
 document.body.insertBefore(ov,hdr.nextSibling);
 document.getElementById('menuOpen').addEventListener('click',function(){ov.hidden=false;this.setAttribute('aria-expanded','true')});
@@ -192,4 +197,61 @@ document.querySelectorAll('form[data-form]').forEach(function(f){f.addEventListe
   b.innerHTML='<p>Le site utilise des cookies techniques. Les cookies de mesure ne sont déposés qu\'avec votre accord. <a class="more" href="'+R+'confidentialite/index.html">Confidentialité →</a></p><div class="actions"><button class="btn line" type="button" data-c="refus">Refuser</button><button class="btn line" type="button" data-c="ok">Accepter</button></div>';
   document.body.appendChild(b);
   b.addEventListener('click',function(e){var t=e.target.closest('[data-c]');if(!t)return;try{localStorage.setItem(k,t.dataset.c)}catch(err){}b.remove()});})();
+
+/* ---------- Méga-menu : toute l'arborescence d'une rubrique, comme sur le site de la HEAD ---------- */
+(function(){var MENU=window.DT_MENU||{},mega=document.getElementById('mega');if(!mega||!Object.keys(MENU).length)return;
+  var hdr=document.querySelector('header.top'),openK=null,tOpen=null,tClose=null;
+  function href(h){return /^https?:/.test(h)?h:R+h}
+  function ext(h){return /^https?:/.test(h)?' target="_blank" rel="noopener"':''}
+  function render(k){var d=MENU[k];
+    mega.innerHTML='<div class="mega-in"><div class="mega-head"><span class="lab dim">Rubrique</span><a class="xw" href="'+R+d.href+'">'+d.title+'</a><p>'+d.lede+'</p><a class="more" href="'+R+d.href+'">Voir la page →</a></div>'+
+      '<div class="mega-cols">'+d.groups.map(function(g){return '<div class="mega-g"><span class="lab dim">'+g[0]+'</span>'+g[1].map(function(l){return '<a href="'+href(l[1])+'"'+ext(l[1])+'>'+l[0]+'</a>'}).join('')+'</div>'}).join('')+'</div></div>';}
+  function open(k){clearTimeout(tClose);if(openK===k&&!mega.hidden)return;render(k);openK=k;mega.hidden=false;hdr.classList.add('mega-on');
+    document.querySelectorAll('[data-menu]').forEach(function(a){a.classList.toggle('on',a.dataset.menu===k)})}
+  function close(){openK=null;mega.hidden=true;hdr.classList.remove('mega-on');document.querySelectorAll('[data-menu].on').forEach(function(a){a.classList.remove('on')})}
+  document.querySelectorAll('header [data-menu]').forEach(function(a){var k=a.dataset.menu;if(!MENU[k])return;
+    a.setAttribute('aria-haspopup','true');
+    a.addEventListener('mouseenter',function(){clearTimeout(tOpen);tOpen=setTimeout(function(){open(k)},90)});
+    a.addEventListener('mouseleave',function(){clearTimeout(tOpen)});
+    a.addEventListener('focus',function(){open(k)});});
+  hdr.addEventListener('mouseleave',function(){clearTimeout(tOpen);tClose=setTimeout(close,220)});
+  hdr.addEventListener('mouseenter',function(){clearTimeout(tClose)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  document.addEventListener('focusin',function(e){if(!hdr.contains(e.target))close()});
+})();
+
+/* ---------- Organigramme : fils du tronc et liens entre résidents et projets ---------- */
+(function(){document.querySelectorAll('[data-eco]').forEach(function(box){
+  var NS='http://www.w3.org/2000/svg',svg=box.querySelector('.eco-wires'),inn=box.querySelector('.eco-in');
+  var links=[];try{links=JSON.parse(box.querySelector('[data-eco-links]').textContent)}catch(e){}
+  function nd(id){return box.querySelector('[data-id="'+id+'"]')}
+  function el(t,a,p){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(p)p.appendChild(n);return n}
+  function rc(n){var a=n.getBoundingClientRect(),b=inn.getBoundingClientRect();return {l:a.left-b.left,t:a.top-b.top,r:a.right-b.left,b:a.bottom-b.top,cx:(a.left+a.right)/2-b.left,cy:(a.top+a.bottom)/2-b.top}}
+  function draw(){
+    var w=inn.clientWidth,h=inn.clientHeight;svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.innerHTML='';
+    var root=rc(nd('root')),heads=[].slice.call(box.querySelectorAll('.eco-h')).map(rc);
+    var oneCol=heads.length>1&&Math.abs(heads[0].cx-heads[1].cx)<4;
+    if(!oneCol){var y=root.b+(Math.min.apply(null,heads.map(function(x){return x.t}))-root.b)/2;
+      var d='M'+root.cx+' '+root.b+' V'+y+' M'+Math.min.apply(null,heads.map(function(x){return x.cx}))+' '+y+' H'+Math.max.apply(null,heads.map(function(x){return x.cx}));
+      heads.forEach(function(x){d+=' M'+x.cx+' '+y+' V'+x.t});
+      el('path',{d:d,class:'bus'},svg);
+      heads.forEach(function(x){el('circle',{cx:x.cx,cy:x.t,r:3.5,class:'dot'},svg)});el('circle',{cx:root.cx,cy:root.b,r:3.5,class:'dot'},svg);
+      if(!reduce){var p=el('path',{d:d,fill:'none',stroke:'none'},svg),c=el('circle',{r:3,fill:'#fff',style:'filter:drop-shadow(0 0 6px #fff)'},svg);
+        el('animateMotion',{dur:'5s',repeatCount:'indefinite',path:'M'+root.cx+' '+root.b+' V'+y+' H'+heads[0].cx+' V'+heads[0].t},c)}}
+    if(window.innerWidth<641)return;
+    links.forEach(function(L,i){var a=nd(L[0]),b=nd(L[1]);if(!a||!b)return;var A=rc(a),B=rc(b);
+      var right=B.cx>A.cx,x1=right?A.r:A.l,x2=right?B.l:B.r,dx=Math.max(40,Math.abs(x2-x1)*.45)*(right?1:-1);
+      if(Math.abs(A.cx-B.cx)<60){x1=A.r;x2=B.r;dx=60}
+      var d='M'+x1+' '+A.cy+' C '+(x1+dx)+' '+A.cy+', '+(x2-dx)+' '+B.cy+', '+x2+' '+B.cy;
+      el('path',{d:d,class:'lnk','data-a':L[0],'data-b':L[1]},svg);
+      var t=el('text',{x:(x1+x2)/2,y:(A.cy+B.cy)/2-6,'text-anchor':'middle','data-a':L[0],'data-b':L[1]},svg);t.textContent=L[2];});
+  }
+  function hl(id,on){svg.querySelectorAll('[data-a="'+id+'"],[data-b="'+id+'"]').forEach(function(p){p.classList.toggle('on',on);
+    var o=nd(p.dataset.a===id?p.dataset.b:p.dataset.a);if(o)o.classList.toggle('hl',on)})}
+  box.addEventListener('mouseover',function(e){var n=e.target.closest('[data-id]');if(n)hl(n.dataset.id,true)});
+  box.addEventListener('mouseout',function(e){var n=e.target.closest('[data-id]');if(n)hl(n.dataset.id,false)});
+  draw();var t=null;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(draw,120)});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+  new IntersectionObserver(function(e){if(e[0].isIntersecting)setTimeout(draw,950)}).observe(box);
+});})();
 })();

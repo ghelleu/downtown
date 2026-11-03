@@ -926,3 +926,73 @@ a.fund:hover{background:linear-gradient(90deg,rgba(var(--acc-rgb),.28),rgba(0,0,
 .cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:80;max-width:620px;background:#0b0b0b;border:1px solid var(--line2);padding:16px 20px;display:grid;gap:12px}
 .cookie p{margin:0;color:var(--soft);font-size:.9rem}
 .cookie .actions{gap:8px}
+
+/* Méga-menu (arborescence d'une rubrique) */
+header.top.mega-on{background:rgba(0,0,0,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+header.top.mega-on .tcbar{opacity:0;max-height:0;padding:0}
+nav.links a.on::after{transform:scaleX(1)}
+nav.subnav a.on{color:var(--ink)}
+.mega{border-top:1px solid var(--line);padding:28px 0 36px;animation:megaIn .28s cubic-bezier(.2,.7,0,1)}
+@keyframes megaIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.mega-in{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:48px;max-height:min(70vh,640px);overflow:auto}
+.mega-head{display:grid;gap:12px;align-content:start;border-right:1px solid var(--line);padding-right:32px}
+.mega-head .xw{font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:.95}
+.mega-head .xw:hover{color:var(--acc-hi)}
+.mega-head p{margin:0;color:var(--soft);font-size:.95rem}
+.mega-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:24px 32px;align-content:start}
+.mega-g{display:grid;gap:2px;align-content:start}
+.mega-g .lab{margin-bottom:8px;color:var(--acc-hi)}
+.mega-g a{font-size:.92rem;color:var(--soft);padding:5px 0;border-bottom:1px solid transparent;transition:color .2s,padding .2s}
+.mega-g a:hover{color:var(--ink);padding-left:6px}
+@media (max-width:1120px){.mega{display:none}}
+/* Menu mobile en accordéon */
+.overlay{justify-content:flex-start;overflow:auto;padding-top:calc(80px + env(safe-area-inset-top,0px));padding-bottom:40px}
+.overlay .ov-sec{border-bottom:1px solid var(--line)}
+.overlay .ov-sec summary{list-style:none;cursor:pointer;font-variation-settings:"wdth" 125;font-weight:900;font-size:clamp(1.8rem,8vw,3.6rem);text-transform:uppercase;line-height:1.05;padding:10px 0;display:flex;justify-content:space-between;align-items:center}
+.overlay .ov-sec summary::-webkit-details-marker{display:none}
+.overlay .ov-sec summary::after{content:"+";font-weight:400;font-size:1.6rem}
+.overlay .ov-sec[open] summary::after{content:"–"}
+.overlay .ov-body{display:grid;gap:20px;padding:4px 0 24px}
+.overlay .ov-body a{font-variation-settings:"wdth" 100;font-weight:400;font-size:1rem;text-transform:none;line-height:1.4;color:var(--soft)}
+.overlay .ov-body .ov-top{color:var(--acc-hi);font-weight:600}
+.overlay .ov-g{display:grid;gap:6px}
+
+/* Organigramme de l'écosystème : graphe de nœuds */
+.eco-in{position:relative;padding:28px 24px 24px}
+.eco-wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.eco-root,.eco-cols,.eco-leg{position:relative;z-index:1}
+.eco-root{display:grid;justify-items:center;gap:4px;text-align:center;margin:0 auto 64px;width:max-content;max-width:100%;padding:16px 32px;border:1px solid var(--ink);background:#000;box-shadow:0 0 0 1px var(--ink);transition:box-shadow .3s,border-color .3s}
+.eco-root b{font-variation-settings:"wdth" 125;font-weight:900;text-transform:uppercase;font-size:clamp(1.6rem,3.4vw,2.8rem);line-height:.9}
+.eco-root .s{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.eco-root:hover{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 0 40px var(--acc-glow)}
+.eco-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:start}
+.eco-h{display:grid;gap:4px;padding:12px 14px;border:1px solid var(--line2);background:#050505;margin-bottom:16px;transition:background .3s,border-color .3s}
+.eco-h .lab{color:var(--acc-hi)}
+.eco-h b{font-variation-settings:"wdth" 125;font-weight:900;text-transform:uppercase;font-size:clamp(1.1rem,1.7vw,1.5rem);line-height:.95}
+.eco-h .s{font-size:.8rem;color:var(--dim)}
+.eco-h:hover,.eco-h.hl{background:var(--acc);border-color:var(--acc)}
+.eco-h:hover .lab,.eco-h:hover .s,.eco-h.hl .lab,.eco-h.hl .s{color:#fff}
+.eco-tree,.eco-tree ul{list-style:none;margin:0;padding:0}
+.eco-tree ul{padding-left:18px}
+.eco-tree li{position:relative;padding:4px 0 4px 16px}
+.eco-tree li::before{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px solid var(--line2)}
+.eco-tree li:last-child::before{bottom:auto;height:19px}
+.eco-tree li::after{content:"";position:absolute;left:0;top:19px;width:12px;border-top:1px solid var(--line2)}
+.eco-n{display:inline-flex;gap:6px;align-items:baseline;padding:6px 10px;border:1px solid var(--soft);background:#050505;font-size:.84rem;line-height:1.25;color:var(--ink);transition:border-color .25s,background .25s,box-shadow .25s}
+.eco-n.k-h{border-style:dashed;border-color:var(--line2);color:var(--soft)}
+.eco-n.k-f{border-style:dotted;border-color:var(--soft)}
+.eco-n em{font-style:normal;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-hi)}
+.eco-n:hover,.eco-n.hl{border-color:var(--acc);border-style:solid;color:var(--ink);box-shadow:0 0 18px var(--acc-glow);background:rgba(var(--acc-rgb),.14)}
+.eco-leg{margin-top:28px;padding-top:16px;border-top:1px solid var(--line)}
+.legend i.x{border:0;border-top:1px dashed var(--acc);height:0;vertical-align:3px}
+.eco-wires .bus{fill:none;stroke:rgba(255,255,255,.5);stroke-width:1}
+.eco-wires .lnk{fill:none;stroke:var(--acc);stroke-width:1.2;stroke-dasharray:4 5;opacity:.55;transition:opacity .3s,stroke-width .3s}
+.eco-wires .lnk.on{opacity:1;stroke-width:2;filter:drop-shadow(0 0 5px var(--acc-glow))}
+.eco-wires text{font-family:var(--font);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;fill:var(--acc-hi);paint-order:stroke;stroke:#000;stroke-width:4px;opacity:.75;transition:opacity .3s}
+.eco-wires text.on{opacity:1}
+.eco-wires .dot{fill:var(--acc)}
+@media (max-width:1100px){.eco-cols{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}}
+@media (max-width:640px){.eco-cols{grid-template-columns:1fr}.eco-in{padding:20px 16px}.eco-root{margin-bottom:28px}}
+.eco.panel{background:rgba(0,0,0,.93)}
+.eco-wires text{opacity:0}.eco-wires text.on{opacity:1}
+.overlay{background:#000}
