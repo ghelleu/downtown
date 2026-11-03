@@ -5,98 +5,104 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Système graphique</title>
-<meta name="description" content="Adaptation du système graphique Progress au site Downtown Studio : tokens, typographie, composants et couleur d'accent à valider.">
+<meta name="description" content="La charte Base Design appliquée au site Downtown Studio : couleurs, typographies, mosaïque de pixels et composants.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/ds.css">
 <style>
-.sw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.sw div{background:#000;padding:16px;display:grid;gap:8px}
-.sw i{display:block;height:72px;border:1px solid var(--line)}
-.sw b{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.sw{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) repeat(4,minmax(0,.6fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sw div{background:var(--bg);padding:16px;display:grid;gap:8px;align-content:start}
+.sw i{display:block;height:120px;border:1px solid var(--line)}
+.sw b{font-weight:500}
 .sw span{font-size:.86rem;color:var(--soft)}
-.acc-cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.acc-cmp article{background:rgba(0,0,0,.88);padding:var(--pad);display:grid;gap:16px;align-content:start}
-.acc-cmp .chip{height:120px;display:flex;align-items:flex-end;padding:12px;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff}
-.picker{display:flex;flex-wrap:wrap;gap:8px}
-.picker button{font:inherit;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--line2);padding:12px 14px;cursor:pointer;display:flex;gap:10px;align-items:center}
-.picker button i{width:14px;height:14px;display:inline-block}
-.picker button[aria-pressed="true"]{border-color:var(--ink);background:rgba(255,255,255,.08)}
-.type-row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.type-row .lab{color:var(--dim)}
+.type-row{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.type-row>.lab{color:var(--dim)}
+.duo-type{display:grid;gap:0;font-size:clamp(2.6rem,7vw,6.4rem);line-height:.92}
+.duo-type .px{font-size:1em}
+.duo-type .xw{font-size:1em}
 .cmp{width:100%;border-collapse:collapse;font-size:.95rem}
 .cmp th,.cmp td{text-align:left;padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.cmp th{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.cmp td:first-child{font-weight:700}
+.cmp th{font-family:var(--px);font-weight:300;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;color:var(--dim)}
+.cmp td:first-child{font-weight:500}
 .cmp td{color:var(--soft)}
-@media (max-width:980px){.sw,.acc-cmp{grid-template-columns:1fr 1fr}.type-row{grid-template-columns:1fr}.cmp{font-size:.86rem}}
-@media (max-width:640px){.sw,.acc-cmp{grid-template-columns:1fr}}
+.pairs-v{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--ink);border:1px solid var(--ink)}
+.pairs-v div{padding:var(--pad);display:grid;gap:12px;align-content:start;min-height:220px}
+.pairs-v div:first-child{background:var(--bg)}
+.pairs-v div:last-child{background:var(--ink);color:var(--bg)}
+.pairs-v .px{font-size:clamp(1.6rem,3vw,2.6rem)}
+@media (max-width:980px){.sw{grid-template-columns:1fr 1fr}.type-row{grid-template-columns:1fr}.cmp{font-size:.86rem}.pairs-v{grid-template-columns:1fr}}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body class="no-js" data-root="" data-page="systeme">
 <canvas id="gl" aria-hidden="true" data-src="img/atmos-1.jpg" data-mode="inner"></canvas>
-<div id="shade"></div><div id="veil"></div><div class="grain"></div>
 
 <main>
 <section class="page-hero gut"><div class="max">
   <span class="lab dim">Maquette · document de travail</span>
   <h1 class="xw" style="margin-top:24px">Système graphique</h1>
-  <p>Le site reprend le système du nouveau site Progress : mêmes couleurs de base, même typographie, même grille et mêmes composants. Les deux sites se lisent comme une famille. Downtown garde son nom, son logo et une couleur d'accent qui lui est propre.</p>
+  <p>Le site reprend la charte que Base Design a dessinée pour Freestudios (présentation « Branding » du 02.02.23) : une mise en page en noir et blanc et des images construites par pixels. Downtown Studio garde son nom et son logo. Le symbole « F » auto-généré appartient à Freestudios et n'est pas repris.</p>
 </div></section>
 
-<section class="sec gut" id="accent" data-ch="Accent" style="padding-top:24px"><div class="max">
-  <div class="sec-head"><span class="lab">01 · Accent</span><div>
-    <h2 class="xw">Couleur d'accent, à valider</h2>
-    <p>Progress utilise un bleu d'écran. Je propose pour Downtown un rouge « tally », la lampe qui signale l'enregistrement en studio et qui s'allume sur une tranche de console en lecture. Il reprend le rouge « Signal » de la maquette de Pascal (#F53220), éclairci pour rester lisible sur fond noir.</p>
-  </div></div>
-  <div class="acc-cmp" data-rv>
-    <article><span class="lab dim">Progress · existant</span><div class="chip" style="background:#2F5BFF">#2F5BFF · bleu</div><p class="dim">Barre de timecode, nœud actif, survol des boutons, nuage de points.</p></article>
-    <article><span class="lab" style="color:var(--acc-hi)">Downtown · proposition</span><div class="chip" style="background:var(--acc)" id="chipDt">#FF3B1F · rouge tally</div><p class="dim">Mêmes usages. Le nuage de points de l'ouverture passe aussi au rouge.</p></article>
+<section class="sec gut" data-ch="Deux registres" style="padding-top:24px"><div class="max">
+  <div class="sec-head"><span class="lab">01 · Deux registres</span><div><h2 class="xw">Le cadre en noir et blanc, la vie dans les images</h2>
+    <p>La charte oppose deux registres. Le site applique le premier à la mise en page et laisse le second aux photos, aux affiches et à la mosaïque.</p></div></div>
+  <div class="pairs-v" data-rv>
+    <div><span class="lab dim">Mise en page</span><span class="px">Binaire, clair, rationnel</span><p class="dim" style="margin:0">Fond blanc, blocs noirs et filets fins, sans dégradé.</p></div>
+    <div><span class="lab" style="color:#8C8C8C">Images</span><span class="px">Vibrant, brut, sans filtre</span><p style="margin:0;color:#CFCFCF">Portraits en couleur et en noir et blanc, mélangés.</p></div>
   </div>
-  <h3 class="lab" style="margin:40px 0 16px">Essayer une autre couleur sur toute la maquette</h3>
-  <div class="picker" id="picker">
-    <button type="button" data-acc="#FF3B1F" data-hi="#FF7A5E" data-rgb="255,59,31"><i style="background:#FF3B1F"></i>Rouge tally · proposé</button>
-    <button type="button" data-acc="#2FF766" data-hi="#7BFFA0" data-rgb="47,247,102"><i style="background:#2FF766"></i>Vert « Share » · maquette Pascal</button>
-    <button type="button" data-acc="#FFB020" data-hi="#FFCB66" data-rgb="255,176,32"><i style="background:#FFB020"></i>Ambre · marqueur de timeline</button>
-  </div>
-  <p class="cap">Le choix est gardé dans ce navigateur et s'applique aux autres pages de la maquette. Le nuage de points 3D reste rouge dans les deux variantes.</p>
 </div></section>
 
-<section class="sec gut" data-ch="Base"><div class="max">
-  <div class="sec-head"><span class="lab">02 · Base commune</span><div><h2 class="xw">Repris tel quel de Progress</h2></div></div>
+<section class="sec gut" data-ch="Couleurs"><div class="max">
+  <div class="sec-head"><span class="lab">02 · Couleurs</span><div><h2 class="xw">Noir et blanc, puis quatre couleurs</h2>
+    <p>Valeurs relevées sur la planche couleur de la présentation. Les quatre couleurs restent ponctuelles : cases de la mosaïque, bandeau du fonds genevois (bleu glacier), liens entre résidents sur l'organigramme et marques à valider (rouge).</p></div></div>
   <div class="sw" data-rv>
-    <div><i style="background:#000"></i><b>Fond</b><span>#000000</span></div>
-    <div><i style="background:#F4F4F1"></i><b>Encre</b><span>#F4F4F1</span></div>
-    <div><i style="background:#C9C9C4"></i><b>Texte courant</b><span>#C9C9C4</span></div>
-    <div><i style="background:#808080"></i><b>Étiquettes</b><span>#808080</span></div>
+    <div><i style="background:#000"></i><b>Noir</b><span>#000000 · fond des blocs, texte</span></div>
+    <div><i style="background:#fff"></i><b>Blanc</b><span>#FFFFFF · fond des pages</span></div>
+    <div><i style="background:#E6483A"></i><b>Rouge</b><span>#E6483A</span></div>
+    <div><i style="background:#BFC9D6"></i><b>Bleu glacier</b><span>#BFC9D6</span></div>
+    <div><i style="background:#005F7B"></i><b>Pétrole</b><span>#005F7B</span></div>
+    <div><i style="background:#905F38"></i><b>Brun</b><span>#905F38</span></div>
+  </div>
+</div></section>
+
+<section class="sec gut" data-ch="Typographies"><div class="max">
+  <div class="sec-head"><span class="lab">03 · Typographies</span><div><h2 class="xw">Alias Rough et Neue Montreal</h2>
+    <p>La charte associe RT Alias Rough en Light, une linéale au contour pixellisé, et PP Neue Montreal en Medium et Bold. La maquette les affiche quand elles sont installées sur l'ordinateur. Ailleurs, elle les remplace par Inter Tight, aux proportions proches.</p></div></div>
+  <div class="duo-type" data-rv>
+    <span class="px">Post-produits</span>
+    <span class="xw">à Genève</span>
   </div>
   <div style="margin-top:40px" data-rv>
-    <div class="type-row"><span class="lab">Titre · Archivo 900, largeur 125</span><span class="xw" style="font-size:clamp(2rem,5vw,4rem)">Post-produits ici</span></div>
-    <div class="type-row"><span class="lab">Sous-titre · Archivo 800, largeur 118</span><span style="font-variation-settings:'wdth' 118;font-weight:800;text-transform:uppercase;font-size:1.6rem;line-height:1.05">Auditorium Dolby Atmos</span></div>
-    <div class="type-row"><span class="lab">Texte · Archivo 400, 17 px</span><span style="color:var(--soft)">Les salles se louent à l'heure ou à la journée, avec ou sans opérateur.</span></div>
-    <div class="type-row"><span class="lab">Étiquette · Archivo 600, largeur 110</span><span class="lab">Son · C02 · 400 m³</span></div>
+    <div class="type-row"><span class="lab">Titre · Neue Montreal Medium</span><span class="xw" style="font-size:clamp(2rem,5vw,4rem)">Le lieu où Genève fabrique ses récits</span></div>
+    <div class="type-row"><span class="lab">Accroche · Alias Rough Light, capitales</span><span class="px" style="font-size:clamp(1.4rem,3vw,2.4rem)">Post-production, expériences, formation</span></div>
+    <div class="type-row"><span class="lab">Texte · Neue Montreal, 17 px</span><span style="color:var(--soft)">Les salles se louent à l'heure ou à la journée, avec ou sans opérateur.</span></div>
+    <div class="type-row"><span class="lab">Étiquette · Alias Rough Light</span><span class="lab">Son · C02 · 400 m³</span></div>
+    <div class="type-row"><span class="lab">Bouton</span><span class="actions"><a class="btn" href="reserver/index.html">Réserver une salle <span aria-hidden="true">→</span></a><a class="btn line" href="films/index.html">Voir les films</a></span></div>
+    <div class="type-row"><span class="lab">Licences</span><span><span class="tbd" data-who="Pascal">[À VALIDER : licences web de PP Neue Montreal (Pangram Pangram) et RT Alias Rough (Razzia Type) pour le site en ligne]</span></span></div>
     <div class="type-row"><span class="lab">Information manquante</span><span><span class="tbd" data-who="exemple">[À VALIDER : description précise de ce qui manque]</span></span></div>
   </div>
 </div></section>
 
+<section class="sec gut noir" data-ch="Mosaïque"><div class="max">
+  <div class="sec-head"><span class="lab">04 · Mosaïque</span><div><h2 class="xw">L'image se construit par pixels</h2>
+    <p>Dans la présentation, le symbole se génère sur une grille dont on règle la graisse, l'affinage de la trame, la hauteur et la largeur, et les portraits passent du flou de pixels à la photo nette. Le site en tire une mosaïque : en haut de chaque page, la photo de la page apparaît en gros pixels puis s'affine, et des aplats noirs, blancs et de couleur s'y déplacent. La trame grossit sous le pointeur.</p></div></div>
+</div></section>
+
 <section class="sec gut" data-ch="Composants"><div class="max">
-  <div class="sec-head"><span class="lab">03 · Composants</span><div><h2 class="xw">Ce qui vient de Progress, ce qui est propre à Downtown</h2>
-    <p>Le langage reste celui d'une interface de post-production. Downtown ajoute des motifs tirés de ses propres salles : la console de mixage, le banc de montage, la fiche technique.</p></div></div>
+  <div class="sec-head"><span class="lab">05 · Composants</span><div><h2 class="xw">Ce qui change par rapport à la version précédente</h2>
+    <p>La structure des pages et les contenus ne bougent pas. Seule leur présentation passe à la charte Base Design.</p></div></div>
   <table class="cmp" data-rv>
-    <thead><tr><th>Composant</th><th>Origine</th><th>Usage sur Downtown</th></tr></thead>
+    <thead><tr><th>Élément</th><th>Avant (système Progress)</th><th>Maintenant (charte Base Design)</th></tr></thead>
     <tbody>
-      <tr><td>Nuage de points 3D</td><td>Progress</td><td>Ouverture de l'accueil, avec la photo de l'auditorium Atmos</td></tr>
-      <tr><td>Barre de timecode</td><td>Progress</td><td>Navigation par chapitres sur les pages longues</td></tr>
-      <tr><td>Chapitres numérotés et règle graduée</td><td>Progress</td><td>Toutes les pages</td></tr>
-      <tr><td>Cycle de nœuds</td><td>Progress</td><td>La méthode d'Apprendre, partagée avec Progress (cinq étapes)</td></tr>
-      <tr><td>Journal (pipeline)</td><td>Progress</td><td>Archives de l'agenda avec la participation ; recherche publiée</td></tr>
-      <tr><td>Fiche technique</td><td>Progress (« sheet »), étendue</td><td>Fiches des salles : volume, matériel, tarif</td></tr>
-      <tr><td>Tranches de console</td><td>Downtown</td><td>Les quatre portes de l'accueil, avec vumètre au survol</td></tr>
-      <tr><td>Pellicule et chutier</td><td>Downtown</td><td>Bande d'affiches et liste des films</td></tr>
-      <tr><td>Timeline de clips</td><td>Downtown</td><td>Études de cas : le parcours de Together salle par salle</td></tr>
-      <tr><td>Schéma de la maison</td><td>Downtown</td><td>Trois colonnes sur un socle, avec trois statuts</td></tr>
-      <tr><td>Index sur fond noir, listes dépliantes</td><td>Maquette de Pascal</td><td>Index des projets de Créer avec nous, matériel des salles (lot 1)</td></tr>
+      <tr><td>Fond</td><td>Noir, photo en nuage de points 3D</td><td>Blanc, avec des blocs noirs pour les films, Together, la lettre et le pied de page</td></tr>
+      <tr><td>Ouverture des pages</td><td>Nuage de points en plein écran</td><td>Mosaïque de pixels de la photo de la page</td></tr>
+      <tr><td>Titres</td><td>Archivo Black, capitales élargies</td><td>Neue Montreal Medium, bas de casse, approche serrée</td></tr>
+      <tr><td>Étiquettes, boutons</td><td>Archivo, capitales espacées</td><td>Alias Rough Light, capitales</td></tr>
+      <tr><td>Couleur d'accent</td><td>Rouge « tally » #FF3B1F à valider</td><td>Aucune : noir et blanc, et les quatre couleurs de la charte en touches</td></tr>
+      <tr><td>Survol</td><td>Accent rouge et halo lumineux</td><td>Inversion noir et blanc</td></tr>
+      <tr><td>Barre de timecode, vumètres, perforations de pellicule</td><td>Présents</td><td>Retirés</td></tr>
+      <tr><td>Boutons</td><td>Rectangles droits</td><td>Coins arrondis, triangle pixel sur les boutons secondaires</td></tr>
+      <tr><td>Logo</td><td>Downtown Studio</td><td>Downtown Studio, en noir sur les pages blanches</td></tr>
     </tbody>
   </table>
 </div></section>
@@ -105,16 +111,5 @@
 <script src="assets/pages.js"></script>
 <script src="assets/ds.js"></script>
 <script src="assets/gl.js"></script>
-<script>
-(function(){
-var p=document.getElementById('picker'),cur=null;
-try{cur=JSON.parse(localStorage.getItem('dt-acc-full')||'null')}catch(e){}
-function mark(){var a=cur?cur.a:'#FF3B1F';[].forEach.call(p.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',String(b.dataset.acc===a))});
-  var on=p.querySelector('[aria-pressed="true"]');document.getElementById('chipDt').textContent=a+' · '+on.textContent.split('·')[0].trim().toLowerCase()}
-p.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cur={a:b.dataset.acc,h:b.dataset.hi,r:b.dataset.rgb};
-  try{localStorage.setItem('dt-acc-full',JSON.stringify(cur))}catch(err){}window.dtApplyAcc(cur);mark()});
-mark();
-})();
-</script>
 </body>
 </html>
