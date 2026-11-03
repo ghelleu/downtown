@@ -67,13 +67,13 @@ document.body.appendChild(ft);
 /* ---------- La maison en volume : plan ↔ isométrie ---------- */
 [].forEach.call(document.querySelectorAll('[data-iso]'),function(el){
   var stage=el.querySelector('.iso-stage'),world=el.querySelector('.iso-world'),out=el.querySelector('[data-iso-info]'),def=out.textContent;
-  var btns=el.querySelectorAll('[data-view]'),rz=-42,rx=58,live=false,t0=0,hold=0,moved=false;
+  var btns=el.querySelectorAll('[data-view]'),rz=-40,rx=56,live=false,t0=0,hold=0,moved=false;
   function fit(){var w=stage.clientWidth,iso=el.dataset.mode==='iso';
-    var s=iso?Math.min(w/1440,0.95):Math.min(w/1250,0.78),h=iso?Math.round(1080*s)+20:Math.round(1060*s)+20;
-    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?-10*s:0)+'px')}
+    var s=iso?(w<700?w/1150:Math.min(w/1480,0.9)):Math.min(w/1000,0.95),h=iso?Math.round(1060*s)+20:Math.round(720*s)+20;
+    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?90*s:-20*s)+'px')}
   function mode(m){el.dataset.mode=m;el.classList.remove('live');live=false;
     [].forEach.call(btns,function(b){b.setAttribute('aria-pressed',String(b.dataset.view===m))});
-    if(m==='iso'){rz=-42;rx=58;el.style.removeProperty('--rz');el.style.removeProperty('--rx')}
+    if(m==='iso'){rz=-40;rx=56;el.style.removeProperty('--rz');el.style.removeProperty('--rx')}
     fit();hold=Date.now()+1600}
   [].forEach.call(btns,function(b){b.addEventListener('click',function(){mode(b.dataset.view)})});
   /* Info au survol, étage en surbrillance */
