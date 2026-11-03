@@ -57,7 +57,7 @@ ft.innerHTML='<div class="in gut max">'+
     '<span class="k">Presse</span><p>'+T('adresse et contact presse','Pascal')+'</p></div>'+
   '<div class="col"><span class="k">L\'écosystème</span>'+
     '<a href="https://cinetic-creatives.com" target="_blank" rel="noopener">Cinetic Creatives ↗</a>'+
-    '<a href="https://progressgeneve.ch" target="_blank" rel="noopener">Progress ↗</a>'+
+    '<a href="https://guillaumehelleu.com/progress/" target="_blank" rel="noopener">Progress ↗</a>'+
     '<a href="https://magnetic.ch" target="_blank" rel="noopener">Magnetic ↗</a></div>'+
   '<div class="col"><span class="k">Suivre</span><p>Instagram : '+T('compte Instagram unique retenu (@downtowngva ou @downtownstudio.ch)','Pascal')+'</p>'+
     '<a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn, page entreprise ↗</a>'+
