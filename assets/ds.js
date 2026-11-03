@@ -64,16 +64,47 @@ ft.innerHTML='<div class="in gut max">'+
 document.body.appendChild(ft);
 
 
-/* ---------- Plan de la maison : info au survol, quartier en surbrillance ---------- */
-[].forEach.call(document.querySelectorAll('[data-plan]'),function(pl){
-  var out=pl.querySelector('[data-plan-info]'),def=out?out.textContent:'';
-  function show(e){var a=e.target.closest('.bld,.door-tab,.qh a');if(!a||!pl.contains(a))return;
-    var q=a.closest('.q');pl.className=pl.className.replace(/\s?on-\w+/g,'');
-    if(q){var m=q.className.match(/q-(\w+)/);if(m)pl.classList.add('on-'+m[1])}
-    if(out)out.textContent=a.dataset.info||a.textContent.replace(/\s+/g,' ').trim()}
-  pl.addEventListener('mouseover',show);pl.addEventListener('focusin',show);
-  pl.addEventListener('mouseleave',function(){pl.className=pl.className.replace(/\s?on-\w+/g,'');if(out)out.textContent=def});
+/* ---------- La maison en volume : plan ↔ isométrie ---------- */
+[].forEach.call(document.querySelectorAll('[data-iso]'),function(el){
+  var stage=el.querySelector('.iso-stage'),world=el.querySelector('.iso-world'),out=el.querySelector('[data-iso-info]'),def=out.textContent;
+  var btns=el.querySelectorAll('[data-view]'),rz=-42,rx=58,live=false,t0=0,hold=0,moved=false;
+  function fit(){var w=stage.clientWidth,iso=el.dataset.mode==='iso';
+    var s=iso?Math.min(w/1440,0.95):Math.min(w/1250,0.78),h=iso?Math.round(1080*s)+20:Math.round(1060*s)+20;
+    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?-10*s:0)+'px')}
+  function mode(m){el.dataset.mode=m;el.classList.remove('live');live=false;
+    [].forEach.call(btns,function(b){b.setAttribute('aria-pressed',String(b.dataset.view===m))});
+    if(m==='iso'){rz=-42;rx=58;el.style.removeProperty('--rz');el.style.removeProperty('--rx')}
+    fit();hold=Date.now()+1600}
+  [].forEach.call(btns,function(b){b.addEventListener('click',function(){mode(b.dataset.view)})});
+  /* Info au survol, étage en surbrillance */
+  el.addEventListener('mouseover',function(e){var a=e.target.closest('[data-info]');if(!a||!el.contains(a))return;out.textContent=a.dataset.info});
+  el.addEventListener('mouseleave',function(){out.textContent=def});
+  /* Un immeuble s'ouvre au survol : ses étages s'écartent */
+  [].forEach.call(el.querySelectorAll('.bldg'),function(b){var tm=null;
+    b.addEventListener('mouseover',function(e){if(!e.target.closest('.slab,.bb'))return;clearTimeout(tm);if(el.dataset.mode==='iso')b.classList.add('open')});
+    b.addEventListener('mouseout',function(){clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('open')},260)})});
+  /* Glisser pour tourner (en isométrie) */
+  var sx=0,sy=0,srz=0,srx=0,down=false;
+  stage.addEventListener('pointerdown',function(e){if(el.dataset.mode!=='iso')return;down=true;moved=false;sx=e.clientX;sy=e.clientY;srz=rz;srx=rx});
+  window.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx,dy=e.clientY-sy;
+    if(!moved&&Math.abs(dx)+Math.abs(dy)<6)return;if(!moved){moved=true;stage.classList.add('drag');el.classList.add('live');live=true}
+    rz=srz+dx*0.35;rx=Math.max(35,Math.min(72,srx-dy*0.25));el.style.setProperty('--rz',rz+'deg');el.style.setProperty('--rx',rx+'deg');hold=Date.now()+2500});
+  window.addEventListener('pointerup',function(){if(!down)return;down=false;stage.classList.remove('drag')});
+  stage.addEventListener('click',function(e){if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+  /* Au repos, la vue respire doucement ; les unités s'allument une à une */
+  var units=el.querySelectorAll('.u');
+  function tick(t){requestAnimationFrame(tick);if(reduce||el.dataset.mode!=='iso'||down||Date.now()<hold||el.querySelector('.bldg.open'))return;
+    if(!live){el.classList.add('live');live=true;t0=t}
+    el.style.setProperty('--rz',(rz+Math.sin((t-t0)/2600)*7)+'deg')}
+  requestAnimationFrame(tick);
+  if(!reduce)setInterval(function(){var u=units[Math.floor(Math.random()*units.length)];if(!u)return;u.classList.add('lit');setTimeout(function(){u.classList.remove('lit')},900)},380);
+  /* Arrivée : le plan, puis les immeubles se montent */
+  fit();window.addEventListener('resize',fit);
+  if(stage.clientWidth<700){el.querySelector('.iso-list').open=true}
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();setTimeout(function(){mode('iso')},reduce?0:700)}},{threshold:.35});io.observe(stage)}
+  else mode('iso');
 });
+
 /* ---------- Liens vers les pages des lots suivants ---------- */
 var toast=document.createElement('div');toast.className='toast';toast.setAttribute('role','status');document.body.appendChild(toast);
 var tt=null;function say(h){toast.innerHTML=h;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},2600)}
