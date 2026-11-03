@@ -13,15 +13,13 @@ var PAGE=document.body.dataset.page||'';
 
 /* Pages déjà maquettées. Les autres liens affichent le lot prévu. */
 var BUILT=window.DT_BUILT||['index.html','systeme.html'];
-var LOTS={'reserver/':1,'films/':1,'creer-avec-nous/':1,'a-propos/':1,
-  'rejoindre/':2,'residents/':2,'apprendre/':2,'agenda/':2,
-  'impact/':3,'a-propos/emplois/':3,'apprendre/':2,'contact/':3,'lettre/':3,'mentions-legales/':3,'confidentialite/':3};
+var LOTS={};
 
 function T(t,who){return '<span class="tbd" data-who="'+who+'">[À VALIDER : '+t+']</span>'}
 
 /* ---------- En-tête ---------- */
-var MAIN=[['creer-avec-nous/index.html','Créer avec nous','creer'],['reserver/index.html','Réserver','reserver'],['rejoindre/index.html','Rejoindre','rejoindre'],['apprendre/index.html','Apprendre','apprendre'],['agenda/index.html','Agenda','agenda']];
-var SEC=[['films/index.html','Films','films'],['residents/index.html','Résidents','residents'],['a-propos/index.html','À propos','apropos']];
+var MAIN=[['creer/index.html','Créer','creer'],['produire/index.html','Produire','produire'],['apprendre/index.html','Apprendre','apprendre'],['rencontrer/index.html','Rencontrer','rencontrer']];
+var SEC=[['a-propos/index.html','À propos','apropos']];
 function cur(k){return k===PAGE?' aria-current="page"':''}
 var hdr=document.createElement('header');hdr.className='top';
 hdr.innerHTML='<div class="gut max"><div class="bar">'+
@@ -46,23 +44,23 @@ document.body.insertBefore(ov,hdr.nextSibling);
 document.getElementById('menuOpen').addEventListener('click',function(){ov.hidden=false;this.setAttribute('aria-expanded','true')});
 document.getElementById('menuClose').addEventListener('click',function(){ov.hidden=true;document.getElementById('menuOpen').setAttribute('aria-expanded','false')});
 
-/* ---------- Pied de page (quatre colonnes de l'architecture) ---------- */
+/* ---------- Pied de page : les quatre portes, puis la maison ---------- */
 var ft=document.createElement('footer');ft.className='site';
 ft.innerHTML='<div class="in gut max">'+
   '<div class="col"><a class="logo dt" href="'+R+'index.html"><img src="'+R+'img/logo-downtown.svg" alt="Downtown Studio"></a>'+
-    '<span class="k">La maison</span><p>Rue des Vieux-Grenadiers 10<br>1205 Genève</p><a href="tel:+41225925049">+41 22 592 50 49</a>'+
+    '<p>Rue des Vieux-Grenadiers 10<br>1205 Genève</p><a href="tel:+41225925049">+41 22 592 50 49</a>'+
+    '<a class="mail" href="mailto:contact@downtownstudio.ch" style="justify-self:start">contact@downtownstudio.ch</a>'+
     '<a href="'+R+'a-propos/index.html#acces">Plan d\'accès</a><p>Accueil : '+T('horaires d\'accueil du lieu','Pascal')+'</p></div>'+
-  '<div class="col"><span class="k">Projets et devis</span><p>'+T('adresse projets@downtownstudio.ch','Pascal')+'</p>'+
-    '<span class="k">Réservations et membership</span><a class="mail" href="mailto:contact@downtownstudio.ch" style="justify-self:start">contact@downtownstudio.ch</a>'+
-    '<span class="k">Presse</span><p>'+T('adresse et contact presse','Pascal')+'</p></div>'+
-  '<div class="col"><span class="k">L\'écosystème</span>'+
-    '<a href="https://cinetic-creatives.com" target="_blank" rel="noopener">Cinetic Creatives ↗</a>'+
+  '<div class="col"><span class="k">Les quatre portes</span>'+MAIN.map(function(m){return '<a href="'+R+m[0]+'">'+m[1]+'</a>'}).join('')+
+    '<span class="k">Contacts</span><a href="'+R+'contact/index.html">Projets, réservations, presse</a></div>'+
+  '<div class="col"><span class="k">Ce que Downtown a fondé</span>'+
     '<a href="https://guillaumehelleu.com/progress/" target="_blank" rel="noopener">Progress ↗</a>'+
-    '<a href="https://magnetic.ch" target="_blank" rel="noopener">Magnetic ↗</a></div>'+
+    '<a href="https://magnetic.ch" target="_blank" rel="noopener">Magnetic ↗</a>'+
+    '<span class="k">Résident fondateur</span><a href="https://cinetic-creatives.com" target="_blank" rel="noopener">Cinetic Creatives ↗</a></div>'+
   '<div class="col"><span class="k">Suivre</span><p>Instagram : '+T('compte Instagram unique retenu (@downtowngva ou @downtownstudio.ch)','Pascal')+'</p>'+
     '<a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn, page entreprise ↗</a>'+
-    '<a href="'+R+'lettre/index.html">La lettre mensuelle</a></div>'+
-  '</div><div class="gut max foot-b"><nav><a href="'+R+'a-propos/index.html">À propos</a><a href="'+R+'a-propos/manifeste/index.html">Manifeste</a><a href="'+R+'impact/index.html">Impact</a><a href="'+R+'contact/index.html">Contact</a><a href="'+R+'a-propos/emplois/index.html">Emplois</a><a href="'+R+'mentions-legales/index.html">Mentions légales</a><a href="'+R+'confidentialite/index.html">Confidentialité</a></nav><span><a href="'+R+'systeme.html">Système graphique (maquette)</a> · Downtown Studio SA · Genève</span></div>';
+    '<a href="'+R+'rencontrer/lettre/index.html">La lettre mensuelle</a></div>'+
+  '</div><div class="gut max foot-b"><nav><a href="'+R+'a-propos/index.html">À propos</a><a href="'+R+'a-propos/manifeste/index.html">Manifeste</a><a href="'+R+'contact/index.html">Contact</a><a href="'+R+'a-propos/emplois/index.html">Emplois</a><a href="'+R+'mentions-legales/index.html">Mentions légales</a><a href="'+R+'confidentialite/index.html">Confidentialité</a></nav><span><a href="'+R+'systeme.html">Système graphique (maquette)</a> · Downtown Studio SA · Genève</span></div>';
 document.body.appendChild(ft);
 
 /* ---------- Liens vers les pages des lots suivants ---------- */

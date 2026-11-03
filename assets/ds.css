@@ -1171,3 +1171,11 @@ section.noir{margin-inline:0}
 .noir .poster figure::after{background:#fff;color:#000}
 /* Placeholder dans un grand titre : reste lisible sans écraser le titre */
 .xw .tbd,.page-hero h1 .tbd{font-size:.3em;letter-spacing:0;vertical-align:.55em;line-height:1.5}
+/* Schéma d'À propos : un socle et quatre portes */
+.house .cols.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.house .cols.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.house .cols.c4{grid-template-columns:1fr}}
+.partners .actions{margin-top:8px}
+/* Accueil : la phrase en ouverture */
+.hero .hero-title.hero-phrase{font-size:clamp(2rem,4.4vw,5rem);max-width:24ch;line-height:1}
+.door .nh span:first-child{font-family:var(--px)}
