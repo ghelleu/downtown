@@ -63,6 +63,17 @@ ft.innerHTML='<div class="in gut max">'+
   '</div><div class="gut max foot-b"><nav><a href="'+R+'a-propos/index.html">À propos</a><a href="'+R+'a-propos/manifeste/index.html">Manifeste</a><a href="'+R+'contact/index.html">Contact</a><a href="'+R+'a-propos/emplois/index.html">Emplois</a><a href="'+R+'mentions-legales/index.html">Mentions légales</a><a href="'+R+'confidentialite/index.html">Confidentialité</a></nav><span><a href="'+R+'systeme.html">Système graphique (maquette)</a> · Downtown Studio SA · Genève</span></div>';
 document.body.appendChild(ft);
 
+
+/* ---------- Plan de la maison : info au survol, quartier en surbrillance ---------- */
+[].forEach.call(document.querySelectorAll('[data-plan]'),function(pl){
+  var out=pl.querySelector('[data-plan-info]'),def=out?out.textContent:'';
+  function show(e){var a=e.target.closest('.bld,.door-tab,.qh a');if(!a||!pl.contains(a))return;
+    var q=a.closest('.q');pl.className=pl.className.replace(/\s?on-\w+/g,'');
+    if(q){var m=q.className.match(/q-(\w+)/);if(m)pl.classList.add('on-'+m[1])}
+    if(out)out.textContent=a.dataset.info||a.textContent.replace(/\s+/g,' ').trim()}
+  pl.addEventListener('mouseover',show);pl.addEventListener('focusin',show);
+  pl.addEventListener('mouseleave',function(){pl.className=pl.className.replace(/\s?on-\w+/g,'');if(out)out.textContent=def});
+});
 /* ---------- Liens vers les pages des lots suivants ---------- */
 var toast=document.createElement('div');toast.className='toast';toast.setAttribute('role','status');document.body.appendChild(toast);
 var tt=null;function say(h){toast.innerHTML=h;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},2600)}
