@@ -57,7 +57,7 @@ ft.innerHTML='<div class="in gut max">'+
   '<div class="col"><span class="k">Suivre</span><p>Instagram : '+T('compte Instagram unique retenu (@downtowngva ou @downtownstudio.ch)','Pascal')+'</p>'+
     '<a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn, page entreprise ↗</a>'+
     '<a href="'+R+'lettre/index.html">La lettre mensuelle</a></div>'+
-  '</div><div class="gut max foot-b"><nav><a href="'+R+'a-propos/index.html">À propos</a><a href="'+R+'a-propos/manifeste/index.html">Manifeste</a><a href="'+R+'mentions-legales/index.html">Mentions légales</a><a href="'+R+'confidentialite/index.html">Confidentialité</a></nav><span><a href="'+R+'systeme.html">Système graphique (maquette)</a> · Downtown Studio SA · Genève</span></div>';
+  '</div><div class="gut max foot-b"><nav><a href="'+R+'a-propos/index.html">À propos</a><a href="'+R+'a-propos/manifeste/index.html">Manifeste</a><a href="'+R+'impact/index.html">Impact</a><a href="'+R+'contact/index.html">Contact</a><a href="'+R+'a-propos/emplois/index.html">Emplois</a><a href="'+R+'mentions-legales/index.html">Mentions légales</a><a href="'+R+'confidentialite/index.html">Confidentialité</a></nav><span><a href="'+R+'systeme.html">Système graphique (maquette)</a> · Downtown Studio SA · Genève</span></div>';
 document.body.appendChild(ft);
 
 /* ---------- Liens vers les pages des lots suivants ---------- */
@@ -185,4 +185,11 @@ document.querySelectorAll('form[data-form]').forEach(function(f){f.addEventListe
     [[a,acc,2.6,.65],[b,'#ffffff',3.4,.85]].forEach(function(q){for(var j=0;j<4;j++){var c=el('circle',{r:3,fill:q[1],style:'filter:drop-shadow(0 0 5px '+q[1]+')'},svg);el('animateMotion',{dur:q[2]+'s',repeatCount:'indefinite',begin:(j*q[3])+'s',path:q[0]},c)}});}
   build();window.addEventListener('resize',function(){clearTimeout(build.t);build.t=setTimeout(build,150)});
   new IntersectionObserver(function(e){if(e[0].isIntersecting)build()}).observe(svg);})();
+
+/* ---------- Bandeau cookies : refus par défaut des cookies non essentiels ---------- */
+(function(){var k='dt-cookies',v=null;try{v=localStorage.getItem(k)}catch(e){}if(v)return;
+  var b=document.createElement('div');b.className='cookie';b.setAttribute('role','dialog');b.setAttribute('aria-label','Cookies');
+  b.innerHTML='<p>Le site utilise des cookies techniques. Les cookies de mesure ne sont déposés qu\'avec votre accord. <a class="more" href="'+R+'confidentialite/index.html">Confidentialité →</a></p><div class="actions"><button class="btn line" type="button" data-c="refus">Refuser</button><button class="btn line" type="button" data-c="ok">Accepter</button></div>';
+  document.body.appendChild(b);
+  b.addEventListener('click',function(e){var t=e.target.closest('[data-c]');if(!t)return;try{localStorage.setItem(k,t.dataset.c)}catch(err){}b.remove()});})();
 })();

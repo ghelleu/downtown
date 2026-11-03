@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Contact · Downtown Studio Genève</title>
+<meta name="description" content="Contacter Downtown Studio à Genève : projets et devis, réservations et membership, presse. Rue des Vieux-Grenadiers 10, 1205 Genève, +41 22 592 50 49.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Downtown Studio", "telephone": "+41 22 592 50 49", "email": "contact@downtownstudio.ch", "address": {"@type": "PostalAddress", "streetAddress": "Rue des Vieux-Grenadiers 10", "postalCode": "1205", "addressLocality": "Genève", "addressCountry": "CH"}, "url": "https://downtownstudio.ch/"}</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="no-js" data-root="../" data-page="contact">
+<canvas id="gl" aria-hidden="true" data-src="../img/hall.jpg" data-mode="inner"></canvas>
+<div id="shade"></div><div id="veil"></div><div class="grain"></div>
+<main>
+<section class="page-hero gut"><div class="max">
+  <span class="crumb"><a href="../index.html">Accueil</a> / Contact</span>
+  <h1 class="xw mid" style="margin-top:24px">Contact</h1>
+  <p>Un seul formulaire. Choisissez votre besoin : le message part directement à la bonne personne.</p>
+</div></section>
+
+<section class="sec gut" data-ch="Votre message" style="padding-top:24px"><div class="max reg-wrap">
+  <form class="simple" id="contactForm" data-form="Merci. Votre message est parti." novalidate>
+    <fieldset><legend>Votre besoin</legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="besoin" value="projets"><span class="dot"></span><strong>Un projet, un devis</strong><small>Une expérience, une commande, une salle avec opérateur.</small></label>
+        <label class="opt"><input type="radio" name="besoin" value="contact"><span class="dot"></span><strong>Réserver, devenir membre</strong><small>Une salle, un bureau, une visite, la domiciliation.</small></label>
+        <label class="opt"><input type="radio" name="besoin" value="presse"><span class="dot"></span><strong>Presse</strong><small>Une demande d'interview, d'images ou d'information.</small></label>
+      </div>
+    </fieldset>
+    <p class="hint" id="route">Le message partira vers : <b>choisissez un besoin</b></p>
+    <div class="two"><div class="field"><label for="k-nom">Nom</label><input type="text" id="k-nom" autocomplete="name"></div>
+      <div class="field"><label for="k-mail">E-mail</label><input type="email" id="k-mail" autocomplete="email"></div></div>
+    <div class="field"><label for="k-msg">Message</label><textarea id="k-msg"></textarea></div>
+    <button class="btn" type="submit" style="justify-self:start">Envoyer <span aria-hidden="true">→</span></button>
+    <p class="ok" role="status"></p>
+  </form>
+  <aside class="side" style="position:static">
+    <div class="card"><span class="lab dim">Projets et devis</span><span><span class="tbd" data-who="Pascal">[À VALIDER : adresse projets@downtownstudio.ch]</span></span></div>
+    <div class="card"><span class="lab dim">Réservations et membership</span><a class="mail" href="mailto:contact@downtownstudio.ch" style="justify-self:start">contact@downtownstudio.ch</a></div>
+    <div class="card"><span class="lab dim">Presse</span><span><span class="tbd" data-who="Pascal">[À VALIDER : adresse et contact presse]</span></span></div>
+    <div class="card"><span class="lab dim">La maison</span><span>Rue des Vieux-Grenadiers 10, 1205 Genève<br>+41 22 592 50 49</span><a class="more" href="../a-propos/index.html#acces">Plan d'accès →</a></div>
+  </aside>
+</div></section>
+
+<script>
+(function(){var f=document.getElementById('contactForm'),r=document.getElementById('route');
+  var M={projets:'l’équipe projets (adresse projets@ à valider)',contact:'contact@downtownstudio.ch',presse:'le contact presse (adresse à valider)'};
+  f.addEventListener('change',function(e){if(e.target.name==='besoin')r.innerHTML='Le message partira vers : <b>'+M[e.target.value]+'</b>'});})();
+</script>
+
+</main>
+<script src="../assets/pages.js"></script>
+<script src="../assets/ds.js"></script>
+<script src="../assets/gl.js"></script>
+</body>
+</html>
