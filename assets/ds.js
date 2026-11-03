@@ -12,10 +12,10 @@ var R=document.body.dataset.root||'';           /* chemin relatif vers la racine
 var PAGE=document.body.dataset.page||'';
 
 /* Pages déjà maquettées. Les autres liens affichent le lot prévu. */
-var BUILT=['index.html','systeme.html'];
+var BUILT=window.DT_BUILT||['index.html','systeme.html'];
 var LOTS={'reserver/':1,'films/':1,'creer-avec-nous/':1,'a-propos/':1,
   'rejoindre/':2,'residents/':2,'apprendre/':2,'agenda/':2,
-  'impact/':3,'contact/':3,'lettre/':3,'mentions-legales/':3,'confidentialite/':3};
+  'impact/':3,'a-propos/emplois/':3,'apprendre/':2,'contact/':3,'lettre/':3,'mentions-legales/':3,'confidentialite/':3};
 
 function T(t,who){return '<span class="tbd" data-who="'+who+'">[À VALIDER : '+t+']</span>'}
 
@@ -69,7 +69,7 @@ document.addEventListener('click',function(e){
   var h=a.getAttribute('href')||'';if(!h||h.charAt(0)==='#'||/^(https?:|mailto:|tel:)/.test(h))return;
   var rel=h.indexOf(R)===0?h.slice(R.length):h;rel=rel.split('#')[0];
   if(BUILT.indexOf(rel)>=0)return;
-  var key=Object.keys(LOTS).filter(function(k){return rel.indexOf(k)===0})[0];
+  var key=Object.keys(LOTS).filter(function(k){return rel.indexOf(k)===0}).sort(function(a,b){return b.length-a.length})[0];
   e.preventDefault();ov.hidden=true;
   say('Page prévue au <b>lot '+(key?LOTS[key]:'suivant')+'</b> · /'+rel.replace(/index\.html$/,''));
 });
@@ -146,4 +146,23 @@ document.querySelectorAll('form[data-letter]').forEach(function(f){f.addEventLis
   var m=f.querySelector('input[type=email]'),o=f.querySelector('.ok');
   if(!/^\S+@\S+\.\S+$/.test(m.value.trim())){o.textContent='Indiquez une adresse e-mail valide.';return}
   o.textContent='Merci. La prochaine lettre arrivera à '+m.value.trim()+'.';f.reset()})});
+
+/* ---------- Filtres des listes (Réserver, Films) ---------- */
+document.querySelectorAll('.filters[data-target]').forEach(function(fb){
+  var box=document.querySelector(fb.dataset.target),cnt=document.querySelector('[data-count="'+fb.dataset.target+'"]');
+  function apply(f){
+    var n=0,items=box.querySelectorAll('[data-item]');
+    items.forEach(function(it){var ok=f==='*'||(it.dataset.tags||'').toLowerCase().indexOf(f.toLowerCase())>=0;it.hidden=!ok;if(ok)n++});
+    if(cnt)cnt.textContent=n+(n>1?' résultats':' résultat')+(f==='*'?'':' · '+f);
+    fb.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.f===f))});
+  }
+  fb.addEventListener('click',function(e){var b=e.target.closest('button[data-f]');if(b)apply(b.dataset.f)});
+  apply('*');
+});
+
+/* ---------- Formulaires : retour immédiat, sans rechargement ---------- */
+document.querySelectorAll('form[data-form]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();
+  var m=f.querySelector('input[type=email]'),o=f.querySelector('.ok');
+  if(m&&!/^\S+@\S+\.\S+$/.test(m.value.trim())){o.textContent='Indiquez une adresse e-mail valide.';return}
+  o.textContent=f.dataset.form;f.reset()})});
 })();
