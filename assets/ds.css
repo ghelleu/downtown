@@ -1279,3 +1279,10 @@ section.noir{margin-inline:0}
 @media (max-width:980px){.iso-cols{grid-template-columns:1fr 1fr}.iso-hint{display:none}}
 @media (max-width:640px){.iso-cols{grid-template-columns:1fr}.iso-leg{display:none}}
 @media (prefers-reduced-motion:reduce){.f.front i{animation:none}}
+/* Quatre immeubles : toits plus serrés pour les immeubles hauts */
+.roof{gap:4px;padding:7px}
+.roof ol{gap:2px}
+.roof li a{padding:2px 5px;font-size:10px}
+.rh b{font-size:22px}
+.slab.ext .units .u:not(.ext){background:#fff;color:var(--ink)}
+.iso-cols li.ext a{color:var(--ext)}
