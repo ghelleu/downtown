@@ -1286,3 +1286,42 @@ section.noir{margin-inline:0}
 .rh b{font-size:22px}
 .slab.ext .units .u:not(.ext){background:#fff;color:var(--ink)}
 .iso-cols li.ext a{color:var(--ext)}
+
+/* =====================================================================
+   Décor : chaque élément est un volume à sa taille, empilé de façon organique
+   ===================================================================== */
+.bldg.open{--gap:22px}
+.box{position:absolute;left:0;top:0;transform-style:preserve-3d;opacity:0;
+  transform:translate3d(var(--bx),var(--by),0) scale3d(1,1,.02);
+  transition:transform 1s cubic-bezier(.7,0,.2,1) calc(var(--o) * 70ms + var(--bd)),opacity .4s calc(var(--o) * 70ms + var(--bd))}
+.iso[data-mode="iso"] .box{opacity:1;transform:translate3d(var(--bx),var(--by),calc(var(--z) + var(--o) * var(--gap))) scale3d(1,1,1)}
+.iso.live .box{transition-delay:0ms;transition-duration:.45s}
+.box .f{position:absolute;left:0;top:0;transform-origin:0 0;box-sizing:border-box;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1.2px solid var(--ink);overflow:hidden;padding:0;display:block}
+.box .f.top{background:#fff;padding:6px;display:flex;flex-direction:column;gap:4px;border-width:1.5px}
+/* Façades : trois motifs de fenêtres, une teinte par orientation */
+.box .f.sy{background-color:#ececec}.box .f.sx{background-color:#c4c4c4}.box .f.nx{background-color:#f7f7f7}.box .f.ny{background-color:#d6d6d6}
+.box .f:not(.top){background-image:repeating-linear-gradient(90deg,transparent 0 7px,rgba(0,0,0,.32) 7px 8px,transparent 8px 13px),repeating-linear-gradient(0deg,transparent 0 9px,rgba(0,0,0,.2) 9px 10px)}
+.box:nth-of-type(3n) .f:not(.top){background-image:repeating-linear-gradient(0deg,transparent 0 6px,rgba(0,0,0,.35) 6px 7px,transparent 7px 11px)}
+.box:nth-of-type(3n+1) .f:not(.top){background-image:radial-gradient(rgba(0,0,0,.42) 1.6px,transparent 2px);background-size:10px 10px}
+.box .f:not(.top) span{position:absolute;left:4px;top:4px;max-width:calc(100% - 8px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  background:#fff;color:var(--ink);padding:1px 4px;font-family:var(--px);font-weight:300;font-size:10px;line-height:1.2;text-transform:uppercase;letter-spacing:.02em;border:1px solid var(--ink)}
+/* Ce qui mène dehors */
+.box.ext .f.top{background:var(--ext);color:#fff;border-color:var(--ext)}
+.box.ext .f.sy{background-color:#1d6f88}.box.ext .f.sx{background-color:#0b4d61}.box.ext .f.nx{background-color:#3a8ba3}.box.ext .f.ny{background-color:#0f5a70}
+.box.ext .f:not(.top){border-color:#063a49}
+.box.ext .f:not(.top) span{background:var(--ext);color:#fff;border-color:#fff}
+.box.ext .units .u:not(.ext){background:#fff;color:var(--ink)}
+/* Survol */
+.box:hover .f.top{background:#fff1ef}
+.box:hover .f:not(.top){background-color:var(--red)!important}
+.box:hover .f:not(.top) span{border-color:var(--red)}
+/* Toits équipés */
+.prop{position:absolute;left:0;top:0;transform-style:preserve-3d;pointer-events:none}
+.prop i{position:absolute;left:0;top:0;transform-origin:0 0;box-sizing:border-box;border:1px solid var(--ink);backface-visibility:hidden}
+.prop .p-top{background:#fff}.prop .p-sy{background:#dcdcdc}.prop .p-nx{background:#efefef}.prop .p-sx{background:#b8b8b8}
+.box.ext .prop .p-top{background:#fff}
+/* Ombres portées au sol */
+.shadow{position:absolute;left:0;top:0;transform-origin:0 0;background:rgba(0,0,0,.13);opacity:0;transition:opacity .8s .9s;pointer-events:none}
+.iso[data-mode="iso"] .shadow{opacity:1}
+/* Nom flottant au-dessus du point le plus haut */
+.bb{transform:translate3d(calc(var(--tx) + var(--w) / 2),calc(var(--ty) + var(--d) / 2),calc(var(--top) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * var(--rz))) rotateX(calc(-1 * var(--rx)))}

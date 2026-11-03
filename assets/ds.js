@@ -69,8 +69,8 @@ document.body.appendChild(ft);
   var stage=el.querySelector('.iso-stage'),world=el.querySelector('.iso-world'),out=el.querySelector('[data-iso-info]'),def=out.textContent;
   var btns=el.querySelectorAll('[data-view]'),rz=-40,rx=56,live=false,t0=0,hold=0,moved=false;
   function fit(){var w=stage.clientWidth,iso=el.dataset.mode==='iso';
-    var s=iso?(w<700?w/860:Math.min(w/1100,0.88)):Math.min(w/680,1.15),h=iso?Math.round(980*s)+20:Math.round(720*s)+20;
-    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?150*s:0)+'px')}
+    var s=iso?(w<700?w/800:Math.min(w/1150,1.3)):Math.min(w/680,1.15),h=iso?Math.round(720*s)+80:Math.round(720*s)+20;
+    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?140*s:0)+'px')}
   function mode(m){el.dataset.mode=m;el.classList.remove('live');live=false;
     [].forEach.call(btns,function(b){b.setAttribute('aria-pressed',String(b.dataset.view===m))});
     if(m==='iso'){rz=-40;rx=56;el.style.removeProperty('--rz');el.style.removeProperty('--rx')}
@@ -81,7 +81,7 @@ document.body.appendChild(ft);
   el.addEventListener('mouseleave',function(){out.textContent=def});
   /* Un immeuble s'ouvre au survol : ses étages s'écartent */
   [].forEach.call(el.querySelectorAll('.bldg'),function(b){var tm=null;
-    b.addEventListener('mouseover',function(e){if(!e.target.closest('.slab,.bb'))return;clearTimeout(tm);if(el.dataset.mode==='iso')b.classList.add('open')});
+    b.addEventListener('mouseover',function(e){if(!e.target.closest('.box,.bb'))return;clearTimeout(tm);if(el.dataset.mode==='iso')b.classList.add('open')});
     b.addEventListener('mouseout',function(){clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('open')},260)})});
   /* Glisser pour tourner (en isométrie) */
   var sx=0,sy=0,srz=0,srx=0,down=false;
