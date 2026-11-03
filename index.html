@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Downtown Studio</title>
+<meta name="description" content="Downtown Studio, Genève : salles de post-production, auditorium Dolby Atmos, plateau de tournage, commandes et formation, avec les studios et indépendants qui y travaillent.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ds.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="no-js" data-root="" data-page="accueil">
+
+<canvas id="gl" aria-hidden="true" data-src="img/atmos-1.jpg" data-mode="home"></canvas>
+<div id="shade"></div>
+<div id="veil"></div>
+<div class="grain"></div>
+
+<main>
+
+<!-- ===================== OUVERTURE ===================== -->
+<section class="hero gut">
+  <div class="hud" aria-hidden="true">
+    <span>Source <b>atmos-c02.jpg</b></span>
+    <span>Grille <b id="hudGrid">…</b></span>
+    <span>Points <b id="hudPts">…</b></span>
+    <span>État <b id="hudState">image</b></span>
+  </div>
+  <div class="max" style="width:100%">
+    <span class="lab dim">Genève · Rue des Vieux-Grenadiers 10</span>
+    <h1 class="xw hero-title" style="margin-top:16px">Le lieu où Genève fabrique ses récits</h1>
+    <p class="hero-sub">Post-production, expériences, formation. Depuis <span class="tbd" data-who="Olivier">[À VALIDER : date de référence de la maison (2004 sous le nom Freestudios, 2022 ou 2024)]</span></p>
+    <div class="hero-foot">
+      <p>Downtown Studio réunit des salles de post-production, un plateau de tournage et les studios et indépendants qui y travaillent à l'année.</p>
+      <div class="actions">
+        <a class="btn" href="reserver/index.html">Réserver une salle <span aria-hidden="true">→</span></a>
+        <a class="btn line" href="creer-avec-nous/index.html">Parlons de votre projet</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div><b>1500 m²</b><span>au cœur de Genève</span></div>
+      <div><b><span class="tbd" data-who="Pascal">[À VALIDER : nombre exact de salles]</span></b><span>salles son, image et captation</span></div>
+      <div><b>Dolby Atmos</b><span>auditorium C02 · 400 m³</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stage" aria-hidden="true" style="height:40vh"></div>
+
+<!-- ===================== 01 · LES PORTES ===================== -->
+<section class="sec gut" id="portes" data-ch="Les portes">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">01</span><span class="lab ch-tag">Les portes</span></div>
+      <div>
+        <h2 class="xw ch-title">Par où entrer</h2>
+        <div class="ruler"></div>
+        <div class="lede one"><p>Quatre portes, chacune pour un besoin. Elles mènent à la page qui y répond, avec la personne à contacter.</p></div>
+      </div>
+    </div>
+    <div class="doors block" data-rv>
+      <article class="door">
+        <div class="nh"><span>CH 01</span><span>/reserver/</span></div>
+        <span class="big-no" aria-hidden="true">01</span>
+        <div class="meter" aria-hidden="true"><i></i></div>
+        <div class="db">
+          <span class="aud">Producteurs, monteurs, mixeurs</span>
+          <h3>Réserver</h3>
+          <p>L'auditorium Dolby Atmos, les studios son, les salles d'étalonnage et le plateau de 220 m². À l'heure ou à la journée, avec ou sans opérateur.</p>
+          <a class="btn" href="reserver/index.html">Voir les salles <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="door">
+        <div class="nh"><span>CH 02</span><span>/creer-avec-nous/</span></div>
+        <span class="big-no" aria-hidden="true">02</span>
+        <div class="meter" aria-hidden="true"><i></i></div>
+        <div class="db">
+          <span class="aud">Institutions, fondations, musées, marques</span>
+          <h3>Créer avec nous</h3>
+          <p>Downtown assemble l'équipe de votre projet parmi ses résidents. Vous avez un seul interlocuteur et un seul contrat.</p>
+          <a class="btn" href="creer-avec-nous/index.html">Parlons de votre projet <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="door">
+        <div class="nh"><span>CH 03</span><span>/rejoindre/</span></div>
+        <span class="big-no" aria-hidden="true">03</span>
+        <div class="meter" aria-hidden="true"><i></i></div>
+        <div class="db">
+          <span class="aud">Indépendants et studios</span>
+          <h3>Rejoindre</h3>
+          <p>Un bureau dans la maison, l'annuaire des membres et le tarif membre sur les salles. Dès 75 CHF par mois.</p>
+          <a class="btn" href="rejoindre/index.html">Voir les formules <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="door">
+        <div class="nh"><span>CH 04</span><span>/apprendre/</span></div>
+        <span class="big-no" aria-hidden="true">04</span>
+        <div class="meter" aria-hidden="true"><i></i></div>
+        <div class="db">
+          <span class="aud">Jeunes diplômés, reconversion, start-ups créatives</span>
+          <h3>Apprendre</h3>
+          <p>Se former auprès des professionnels de la maison, sur de vraies productions, ou développer un projet en résidence.</p>
+          <a class="btn" href="apprendre/index.html">Voir les programmes <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 · LA PREUVE CINÉMA ===================== -->
+<section class="sec gut" id="films" data-ch="Post-produits ici">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">02</span><span class="lab ch-tag">Films</span></div>
+      <div>
+        <h2 class="xw ch-title">Post-produits ici</h2>
+        <div class="ruler"></div>
+        <div class="lede">
+          <p>Longs métrages, séries et documentaires passent par nos salles pour le son, l'image et les effets visuels. Les quatre plus récents ont été sélectionnés en festival, de Cannes à Tribeca, ou diffusés par la RTS et Netflix.</p>
+          <p>Chaque fiche film indique ce qui a été fait ici, dans quelle salle, et quel résident l'a fait. <strong>La filmographie complète commence <span class="tbd" data-who="Olivier">[À VALIDER : date de référence de la maison (2004 sous le nom Freestudios, 2022 ou 2024)]</span>.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel block" data-rv>
+      <div class="sprocket" aria-hidden="true"></div>
+      <div class="posters">
+        <a class="poster" href="films/index.html">
+          <figure data-tc="01:00:00:00"><img src="img/f-proces-du-chien-affiche.jpg" alt="Affiche du film Le Procès du chien"></figure>
+          <div class="pc-b">
+            <span class="fest">Cannes 2024 · Un Certain Regard</span>
+            <h3>Le Procès du chien</h3>
+            <span class="made">Réalisation <b>Laetitia Dosch</b><br>Ici : son, image<br>Par <span class="tbd" data-who="Cinetic">[À VALIDER : résident qui a réalisé la post-production (Cinetic Creatives ou autre)]</span></span>
+          </div>
+        </a>
+        <a class="poster" href="films/index.html">
+          <figure data-tc="02:00:00:00"><img src="img/f-gloria-affiche.jpg" alt="Affiche du film Gloria!"></figure>
+          <div class="pc-b">
+            <span class="fest">Berlinale 2024 · Compétition</span>
+            <h3>Gloria!</h3>
+            <span class="made">Réalisation <b>Margherita Vicario</b><br>Ici : son<br>Par <span class="tbd" data-who="Cinetic">[À VALIDER : résident qui a réalisé la post-production (Cinetic Creatives ou autre)]</span></span>
+          </div>
+        </a>
+        <a class="poster" href="films/index.html">
+          <figure data-tc="03:00:00:00"><img src="img/f-desire.jpg" alt="Image du film Desire: The Carl Craig Story" style="object-position:30% 50%"></figure>
+          <div class="pc-b">
+            <span class="fest">Tribeca 2024</span>
+            <h3>Desire</h3>
+            <span class="made">Réalisation <b>Jean-Cosme Delaloye</b><br>Ici : son, image<br>Par <span class="tbd" data-who="Cinetic">[À VALIDER : résident qui a réalisé la post-production (Cinetic Creatives ou autre)]</span></span>
+          </div>
+        </a>
+        <a class="poster" href="films/index.html">
+          <figure data-tc="04:00:00:00"><img src="img/s-winter-palace.jpg" alt="Image de la série Winter Palace"></figure>
+          <div class="pc-b">
+            <span class="fest">Série · RTS et Netflix</span>
+            <h3>Winter Palace</h3>
+            <span class="made">Réalisation <b>Pierre Monnard</b><br>Ici : son, effets visuels<br>Par <span class="tbd" data-who="Cinetic">[À VALIDER : résident qui a réalisé la post-production (Cinetic Creatives ou autre)]</span></span>
+          </div>
+        </a>
+      </div>
+      <div class="sprocket b" aria-hidden="true"></div>
+      <div class="reel-foot">
+        <div><span class="lab dim">Festivals</span><span>Cannes · Berlinale · Tribeca · Locarno</span></div>
+        <div><span class="lab dim">Productions et diffuseurs</span><span>RTS · Netflix · RAI · Tempesta · Point Prod · Rita Productions</span></div>
+        <a class="btn line" href="films/index.html">Toute la filmographie <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <div class="bin panel block" data-rv style="margin-top:24px">
+      <div class="ph"><span><b>Chutier</b> · filmographie</span><span><span class="tbd" data-who="Cinetic">[À VALIDER : liste validée des films (33 titres relevés : 31 chez Cinetic Creatives, 2 de plus sur downtownstudio.ch)]</span></span></div>
+      <ol>
+        <li>À bras-le-corps</li><li>A Thousand Fires</li><li>Allégorie citadine</li><li>Ariaferma</li><li>Bulle</li><li>Ceux qui rougissent</li><li class="k">Desire</li><li class="k">Espèce menacée</li><li>Favolacce</li><li>Gabin</li><li class="k">Gloria!</li>
+        <li>Hors saison</li><li>Intraçables</li><li>L'Étincelle</li><li>L'Ofrena</li><li>La Beauté de l'âne</li><li>La Cache</li><li>La Chimère</li><li>La Dérive des continents</li><li>La Mif</li><li>Laundry</li><li>Lazzaro felice</li>
+        <li class="k">Le Procès du chien</li><li>Le Vent tourne</li><li>O vento assobiando nas gruas</li><li>Peau à peau</li><li class="k">Renaissance</li><li>Rivière</li><li>Sauve qui peut</li><li>Say God Bye</li><li>The Arab</li><li>Until Branches Bend</li><li class="k">Winter Palace</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 · LA PREUVE COMMANDE ===================== -->
+<section class="sec gut" id="together" data-ch="Together">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">03</span><span class="lab ch-tag">Créer avec nous</span></div>
+      <div>
+        <h2 class="xw ch-title">Together, au Portail des Nations</h2>
+        <div class="ruler"></div>
+        <div class="lede">
+          <p>En décembre 2024, la Fondation Portail des Nations confie à Downtown Studio la direction créative de Together, l'expérience immersive du nouveau centre de visiteurs de l'ONU à Genève. Il reste alors un an avant l'ouverture.</p>
+          <p>Le parcours fait vivre le multilatéralisme avant de le nommer. Chaque salle est guidée par une voix, un Hôte. <strong>Le mot n'est prononcé qu'à la fin, quand les trois voix parlent ensemble.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="tog-fig block" data-rv><img src="img/together-1.jpg" alt="Together, projections panoramiques dans une salle du parcours"><figcaption>Together · Portail des Nations, Genève</figcaption></figure>
+    <div class="panel lit" data-rv>
+      <div class="ph"><span><b>Séquence</b> · le parcours, salle par salle</span><span><b data-tc>00:00</b> · durées du storyboard</span></div>
+      <div class="tl" data-total="3873">
+        <div class="tl-ruler" aria-hidden="true"><span style="left:0">00:00</span><span style="left:25%">16:08</span><span style="left:50%">32:16</span><span style="left:75%">48:25</span><span style="left:96%">64:33</span></div>
+        <div class="tl-track">
+          <div class="tl-head" aria-hidden="true"></div>
+          <div class="clip" style="flex:705 1 0"><b>E0 · International Geneva</b><span>La Genève internationale</span><em>11:45</em></div>
+          <div class="clip" style="flex:1083 1 0"><b>E1 · Get together</b><span>Hôte : le Langage</span><em>18:03</em></div>
+          <div class="clip" style="flex:1175 1 0"><b>E2 · Work together</b><span>Hôte : la Connaissance</span><em>19:35</em></div>
+          <div class="clip" style="flex:910 1 0"><b>E3 · Act together</b><span>Hôte : la Réponse</span><em>15:10</em></div>
+          <div class="clip rev"><b>Révé&shy;lation</b></div>
+        </div>
+        <div class="tl-cap"><span>Pré-accueil et boutique non représentés</span><span>Downtown Studio · direction créative depuis <b>décembre 2024</b></span></div>
+      </div>
+      <div class="credits">
+        <div><span class="lab dim">Production exécutive</span><strong>Downtown Studio</strong></div>
+        <div><span class="lab dim">Direction créative</span><strong>Downtown Studio</strong><small>avec Local Projects et Dorier</small></div>
+        <div><span class="lab dim">Production des contenus</span><strong>Cinetic Creatives</strong><small>résident fondateur</small></div>
+      </div>
+      <div class="figs">
+        <div><span class="lab dim">Durée</span><span class="tbd" data-who="Olivier">[À VALIDER : durée de l'expérience Together (1 h selon la maquette, 1 h 23 au storyboard)]</span></div>
+        <div><span class="lab dim">Visiteurs</span><span class="tbd" data-who="Olivier">[À VALIDER : nombre de visiteurs de Together depuis l'ouverture]</span></div>
+        <div><span class="lab dim">Partenaires</span><span class="tbd" data-who="Olivier">[À VALIDER : nombre de partenaires de Together (9 selon la maquette, 60 selon la note stratégique)]</span></div>
+      </div>
+    </div>
+    <div class="actions" style="margin-top:24px" data-rv>
+      <a class="btn" href="creer-avec-nous/together/index.html">Lire l'étude de cas <span aria-hidden="true">→</span></a>
+      <a class="btn line" href="creer-avec-nous/index.html">Créer avec nous</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 · LA MAISON ===================== -->
+<section class="sec gut" id="maison" data-ch="Les salles">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">04</span><span class="lab ch-tag">Réserver</span></div>
+      <div>
+        <h2 class="xw ch-title">Les salles</h2>
+        <div class="ruler"></div>
+        <div class="lede one"><p>Mixage, étalonnage, montage et tournage sous un même toit, avec une équipe technique sur place. Les salles se louent à l'heure ou à la journée ; les membres paient moins.</p></div>
+      </div>
+    </div>
+    <div class="rooms block" data-rv>
+      <a class="room" href="reserver/index.html">
+        <figure><img src="img/atmos-2.jpg" alt="L'auditorium Atmos C02, console et écran de projection"><figcaption>Son · C02</figcaption></figure>
+        <div class="rb">
+          <h3>Auditorium Dolby Atmos</h3>
+          <div class="row"><span>Volume</span><span>400 m³, acoustique de Jean-Baptiste Prigl d'Ondel</span></div>
+          <div class="row"><span>Formats</span><span>5.1, 7.1 et Dolby Atmos</span></div>
+          <div class="row"><span>Console</span><span>Avid S4, Pro Tools Ultimate</span></div>
+          <div class="row"><span>Projection</span><span>Barco laser 4K, écran de 6 m de base, DCP</span></div>
+          <div class="row"><span>Tarif</span><span class="tbd" data-who="Pascal">[À VALIDER : tarifs horaires non-membre et membre de la salle]</span></div>
+          <span class="more">Voir la fiche →</span>
+        </div>
+      </a>
+      <a class="room" href="reserver/index.html">
+        <figure><img src="img/etalonnage-a22.jpg" alt="La salle d'étalonnage A22, pupitre Baselight devant l'écran"><figcaption>Image · A22</figcaption></figure>
+        <div class="rb">
+          <h3>Salle d'étalonnage</h3>
+          <div class="row"><span>Logiciel</span><span>Baselight, pupitre Blackboard 2</span></div>
+          <div class="row"><span>Projection</span><span>Projecteur cinéma laser Barco SP2K-11S</span></div>
+          <div class="row"><span>Son</span><span>5.1</span></div>
+          <div class="row"><span>Tarif</span><span class="tbd" data-who="Pascal">[À VALIDER : tarifs horaires non-membre et membre de la salle]</span></div>
+          <span class="more">Voir la fiche →</span>
+        </div>
+      </a>
+      <a class="room" href="reserver/index.html">
+        <figure><img src="img/tournage.jpg" alt="Le studio de tournage, plateau et fond bleu"><figcaption>Captation · Plateau</figcaption></figure>
+        <div class="rb">
+          <h3>Studio de tournage</h3>
+          <div class="row"><span>Surface</span><span>220 m², dont 180 m² de plateau</span></div>
+          <div class="row"><span>Hauteur</span><span>2,90 m sous plafond</span></div>
+          <div class="row"><span>Accès</span><span>Véhicule jusqu'au plateau pour décharger</span></div>
+          <div class="row"><span>Tarif</span><span class="tbd" data-who="Pascal">[À VALIDER : tarifs horaires non-membre et membre de la salle]</span></div>
+          <span class="more">Voir la fiche →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="fund" style="margin-top:24px" data-rv>
+      <b class="xw">30 %</b>
+      <div>
+        <h3>Post-produire à Genève</h3>
+        <p>Le fonds incitatif genevois rembourse jusqu'à 30 % des dépenses de post-production faites à Genève. <span class="tbd" data-who="Pascal">[À VALIDER : conditions et éligibilité du fonds incitatif genevois]</span></p>
+      </div>
+      <a class="btn" href="reserver/fonds-genevois/index.html">Vérifier l'éligibilité <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="op" data-rv><span><b>Besoin d'un opérateur ?</b> Mixeur, étalonneur ou monteur : les salles se louent aussi avec un professionnel de la maison. Devis sous 48 h.</span><a class="more" href="reserver/index.html#operateur">Demander un devis →</a></div>
+  </div>
+</section>
+
+<!-- ===================== 05 · APPRENDRE & EXPLORER ===================== -->
+<section class="sec gut" id="apprendre" data-ch="Apprendre">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">05</span><span class="lab ch-tag">Apprendre &amp; explorer</span></div>
+      <div>
+        <h2 class="xw ch-title">Se former sur de vraies productions</h2>
+        <div class="ruler"></div>
+        <div class="lede">
+          <p>Les formations sont portées par Progress, association indépendante hébergée par Downtown Studio et soutenue par la FFPC et la Fondation Wilsdorf.</p>
+          <p>On y applique les nouvelles techniques sur les productions de la maison, avec les professionnels qui y travaillent. La résidence Explore accueille de son côté de jeunes structures pendant un an.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="progs block" data-rv>
+      <article class="prog lit">
+        <span class="lab" style="color:var(--acc-hi)">Prochain programme · Progress</span>
+        <h3>Progress AI · décembre 2026</h3>
+        <p>IA et création cinéma. Trois modules autonomes de cinq jours suivent la fabrication d'un film, de la bible visuelle au film hybride, sur un scénario fil rouge commun.</p>
+        <div class="mods">
+          <div><span>M1</span><span><b>Fondations visuelles.</b> Bible visuelle de production.</span></div>
+          <div><span>M2</span><span><b>Production complète IA.</b> Court métrage entièrement généré.</span></div>
+          <div><span>M3</span><span><b>Hybridation réel / IA.</b> Tournage au studio et plans générés.</span></div>
+        </div>
+        <div class="meta">
+          <div><span>Dates</span><span class="tbd" data-who="Progress">[À VALIDER : dates des trois modules de Progress AI (décembre 2026)]</span></div>
+          <div><span>Financement</span><span>FFPC, pour les participants domiciliés à Genève</span></div>
+          <div><span>Avec</span><span>Dirty Bacon Productions, scénario fil rouge et coordination</span></div>
+          <div><span>Lieu</span><span>Salle de cours et studio de tournage de Downtown Studio</span></div>
+        </div>
+        <a class="btn" href="https://progressgeneve.ch" target="_blank" rel="noopener" style="justify-self:start">S'inscrire sur progressgeneve.ch <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="prog lit">
+        <span class="lab" style="color:var(--acc-hi)">Résidence Explore</span>
+        <h3>Creative Futures</h3>
+        <p>Une résidence de douze mois pour quatre start-ups, collectifs ou entrepreneurs de moins de trois ans, à la croisée de la création numérique et des nouvelles technologies.</p>
+        <div class="meta">
+          <div><span>Offert</span><span>Un bureau, une domiciliation et un membership pendant un an</span></div>
+          <div><span>En retour</span><span>Des événements de partage d'expertise pour la communauté</span></div>
+          <div><span>Appel</span><span class="tbd" data-who="Pascal">[À VALIDER : statut de l'appel Creative Futures (le délai annoncé était le 30 septembre)]</span></div>
+        </div>
+        <p style="font-size:.93rem">« La résidence Explore a été un vrai game changer et un boost créatif pour notre film interactif O2. »<br><span class="dim">Vincent Fichera, O2</span></p>
+        <a class="btn line" href="apprendre/residence/index.html" style="justify-self:start">La résidence <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+
+    <h3 class="lab" style="margin:64px 0 16px">La méthode, partagée avec Progress</h3>
+    <div class="nodes n5 block" data-rv>
+      <article class="node"><div class="nh"><span>01</span><span>Mentor</span></div><div class="nb"><h3>Apprendre le métier</h3><p>Auprès d'un professionnel de la maison, sur une production en cours.</p></div><span class="port o"></span><span class="wire"><i></i></span></article>
+      <article class="node"><div class="nh"><span>02</span><span>Veille</span></div><div class="nb"><h3>Suivre les évolutions</h3><p>Repérer les outils qui touchent son métier.</p></div><span class="port i"></span><span class="port o"></span><span class="wire"><i></i></span></article>
+      <article class="node"><div class="nh"><span>03</span><span>Cas réel</span></div><div class="nb"><h3>Tester</h3><p>Mesurer la qualité, le temps et les limites.</p></div><span class="port i"></span><span class="port o"></span><span class="wire"><i></i></span></article>
+      <article class="node"><div class="nh"><span>04</span><span>Mentor</span></div><div class="nb"><h3>Intégrer</h3><p>Décider avec le mentor de la place de l'outil dans le flux du studio.</p></div><span class="port i"></span><span class="port o"></span><span class="wire"><i></i></span></article>
+      <article class="node"><div class="nh"><span>05</span><span>Recherche</span></div><div class="nb"><h3>Publier</h3><p>Documenter le protocole et le résultat.</p></div><span class="port i"></span></article>
+      <div class="loop"><span>Nouvel outil · retour à la veille</span></div>
+    </div>
+
+    <div class="stats s2 block" data-rv>
+      <div><b>4</b><span>recorders formés pour l'auditorium Atmos, premier programme Lift</span></div>
+      <div><b>12</b><span>jeunes professionnels formés au son, au mixage et à l'étalonnage sur Winter Palace et Renaissance</span></div>
+    </div>
+    <div class="actions" style="margin-top:24px"><a class="btn line" href="apprendre/index.html">Tous les programmes <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- ===================== 06 · LES RÉSIDENTS ===================== -->
+<section class="sec gut" id="residents" data-ch="Résidents">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">06</span><span class="lab ch-tag">Résidents</span></div>
+      <div>
+        <h2 class="xw ch-title">Ceux qui travaillent ici</h2>
+        <div class="ruler"></div>
+        <div class="lede one"><p>Des studios et des indépendants ont leurs bureaux dans la maison. Downtown les réunit sur les projets qu'on lui confie, et vous pouvez aussi travailler avec eux en direct.</p></div>
+      </div>
+    </div>
+    <div class="filters block" aria-hidden="true"><span class="on">Tous</span><span>Image</span><span>Son</span><span>Réalisation</span><span>Production</span><span>XR / IA</span><span>Design</span></div>
+    <div class="res" data-rv>
+      <article>
+        <span class="st f">Résident fondateur</span>
+        <h3>Cinetic Creatives</h3>
+        <p>Maison créative installée dans les murs. Son équipe d'une vingtaine de personnes couvre la post-production cinéma, du montage son aux effets visuels.</p>
+        <p><span class="tbd" data-who="Cinetic">[À VALIDER : phrase décrivant le lien entre Downtown Studio et Cinetic Creatives (même direction, maison née de Freestudios)]</span></p>
+        <div class="jobs"><span>Image</span><span>Son</span><span>VFX</span><span>Production</span></div>
+        <a class="ext" href="https://cinetic-creatives.com" target="_blank" rel="noopener">cinetic-creatives.com ↗</a>
+      </article>
+      <article>
+        <span class="st">Résident</span>
+        <h3>Dirty Bacon Productions</h3>
+        <p>La structure de Salar Shahna, pionnier des médias immersifs. Elle conçoit le programme Progress AI et en écrit le scénario fil rouge.</p>
+        <div class="jobs"><span>XR / IA</span><span>Réalisation</span></div>
+        <a class="ext" href="residents/index.html">Fiche résident →</a>
+      </article>
+      <article>
+        <span class="st">Résident</span>
+        <h3>WIP · Work In Progress</h3>
+        <p>Association d'écriture installée au premier étage. Ateliers de scénario et film interactif.</p>
+        <div class="jobs"><span>Réalisation</span><span>Écriture</span></div>
+        <a class="ext" href="residents/index.html">Fiche résident →</a>
+      </article>
+      <article class="empty">
+        <span class="st">Indépendants</span>
+        <h3>Monteurs, mixeurs, étalonneurs</h3>
+        <p><span class="tbd" data-who="Pascal">[À VALIDER : résidents indépendants à présenter, avec portrait et texte de 300 caractères]</span></p>
+      </article>
+    </div>
+    <div class="actions" style="margin-top:24px"><a class="btn line" href="residents/index.html">Tous les résidents <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- ===================== 07 · AGENDA ===================== -->
+<section class="sec gut" id="agenda" data-ch="Agenda">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">07</span><span class="lab ch-tag">Rayonner</span></div>
+      <div>
+        <h2 class="xw ch-title">Prochainement</h2>
+        <div class="ruler"></div>
+        <div class="lede one"><p>Rencontres, soirées d'écoute, conférences et formations ouvertes, au 10 rue des Vieux-Grenadiers. Les dates passées rejoignent les archives d'elles-mêmes.</p></div>
+      </div>
+    </div>
+    <div class="ag block" data-rv>
+      <a class="ev" href="agenda/index.html">
+        <span class="d">19.11<small>Jeudi · 2026</small></span>
+        <span class="s">Assemblée créative</span>
+        <div><h3>Take Two · Geneva Creative Assembly</h3><p><span class="tbd" data-who="Pascal">[À VALIDER : horaire et lien d'inscription de la Geneva Creative Assembly]</span></p></div>
+        <span class="arr" aria-hidden="true">→</span>
+      </a>
+      <a class="ev" href="agenda/index.html">
+        <span class="d">12.26<small>Décembre · 2026</small></span>
+        <span class="s">Formation ouverte · Progress</span>
+        <div><h3>Progress AI, première session</h3><p><span class="tbd" data-who="Progress">[À VALIDER : dates des trois modules de Progress AI (décembre 2026)]</span></p></div>
+        <span class="arr" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="panel block lit" data-rv>
+      <div class="ph"><span><b>Archives</b> · le lieu en 2026</span><span id="archState">participants</span></div>
+      <div class="log arch" data-play="archState">
+        <div><span class="n">18.03.26</span><span class="k">After Dark</span><span class="v">After Dark n°4, session d'écoute sur vinyle</span><span class="s n">114 inscrits</span></div>
+        <div><span class="n">31.03.26</span><span class="k">Journalisme Social Club</span><span class="v">Les fondations philanthropiques et le journalisme, avec l'AGJ</span><span class="s n">34 inscrits</span></div>
+        <div><span class="n">29.04.26</span><span class="k">After Dark</span><span class="v">After Dark n°5</span><span class="s n">60 inscrits</span></div>
+      </div>
+    </div>
+    <div class="priv" data-rv><div><strong>Organisez votre événement ici</strong><br><span>Hall, auditorium Atmos ou plateau de 220 m².</span></div><a class="btn line" href="reserver/privatiser/index.html">Privatiser <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- ===================== 08 · LE SCHÉMA ===================== -->
+<section class="sec gut" id="schema" data-ch="La maison">
+  <div class="max">
+    <div class="chgrid" data-rv>
+      <div><span class="ch-no">08</span><span class="lab ch-tag">La maison</span></div>
+      <div>
+        <h2 class="xw ch-title">Trois colonnes sur un socle</h2>
+        <div class="ruler"></div>
+        <div class="lede one"><p>Un lieu et ses résidents, qui apprennent, créent et rayonnent ensemble.</p></div>
+      </div>
+    </div>
+    <div class="house block" data-rv>
+      <div class="cols">
+        <div class="hcol"><div class="hh"><span>Colonne</span><span>/creer-avec-nous/</span></div><h3>Créer avec nous</h3>
+          <ul><li><a class="k-a" href="creer-avec-nous/index.html">Commandes <span>→</span></a></li><li><a class="k-a" href="creer-avec-nous/together/index.html">Together <span>→</span></a></li></ul></div>
+        <div class="hcol"><div class="hh"><span>Colonne</span><span>/apprendre/</span></div><h3>Apprendre &amp; explorer</h3>
+          <ul><li><a class="k-f" href="apprendre/formations/index.html">Progress, formations <span>→</span></a></li><li><a class="k-a" href="apprendre/residence/index.html">Résidence Explore <span>→</span></a></li></ul></div>
+        <div class="hcol"><div class="hh"><span>Colonne</span><span>/agenda/</span></div><h3>Rayonner</h3>
+          <ul><li><a class="k-a" href="agenda/index.html">Agenda <span>→</span></a></li><li><a class="k-f" href="impact/index.html">Impact <span>→</span></a></li></ul></div>
+      </div>
+      <div class="hbase"><div class="hh"><span>Socle</span><span>La maison</span></div><h3>Le lieu et ses résidents</h3>
+        <ul><li><a class="k-a" href="reserver/index.html">Réserver <span>→</span></a></li><li><a class="k-a" href="rejoindre/index.html">Rejoindre <span>→</span></a></li><li><a class="k-h" href="residents/index.html">Résidents <span>→</span></a></li><li><a class="k-h" href="films/index.html">Films <span>→</span></a></li></ul></div>
+      <div class="legend"><span><i></i>Ce que Downtown fait</span><span><i class="h"></i>Ce que Downtown accueille</span><span><i class="f"></i>Ce que Downtown a fondé</span></div>
+    </div>
+    <div class="actions" style="margin-top:24px"><a class="btn line" href="a-propos/index.html">À propos de la maison <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- ===================== 09 · LA LETTRE ===================== -->
+<section class="sec gut" id="lettre" data-ch="La lettre">
+  <div class="max letter" data-rv>
+    <div>
+      <span class="lab ch-tag" style="margin:0 0 16px">09 · La lettre</span>
+      <h2 class="xw ch-title">Une fois par mois</h2>
+      <ol>
+        <li><span>01</span>Les films qui sortent de nos salles</li>
+        <li><span>02</span>Les événements et les formations ouvertes</li>
+        <li><span>03</span>Les appels à projets et à résidence</li>
+      </ol>
+    </div>
+    <form data-letter novalidate>
+      <div class="field"><label for="l-mail">Votre e-mail</label>
+        <div class="line-in"><input type="email" id="l-mail" autocomplete="email" placeholder="nom@domaine.ch"><button class="btn" type="submit">S'abonner <span aria-hidden="true">→</span></button></div></div>
+      <p class="hint">Désinscription en un clic.</p>
+      <p class="ok" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<script src="assets/ds.js"></script>
+<script src="assets/gl.js"></script>
+</body>
+</html>

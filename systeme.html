@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Système graphique</title>
+<meta name="description" content="Adaptation du système graphique Progress au site Downtown Studio : tokens, typographie, composants et couleur d'accent à valider.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ds.css">
+<style>
+.sw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sw div{background:#000;padding:16px;display:grid;gap:8px}
+.sw i{display:block;height:72px;border:1px solid var(--line)}
+.sw b{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.sw span{font-size:.86rem;color:var(--soft)}
+.acc-cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.acc-cmp article{background:rgba(0,0,0,.88);padding:var(--pad);display:grid;gap:16px;align-content:start}
+.acc-cmp .chip{height:120px;display:flex;align-items:flex-end;padding:12px;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.picker{display:flex;flex-wrap:wrap;gap:8px}
+.picker button{font:inherit;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--line2);padding:12px 14px;cursor:pointer;display:flex;gap:10px;align-items:center}
+.picker button i{width:14px;height:14px;display:inline-block}
+.picker button[aria-pressed="true"]{border-color:var(--ink);background:rgba(255,255,255,.08)}
+.type-row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.type-row .lab{color:var(--dim)}
+.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+.cmp th,.cmp td{text-align:left;padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp th{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.cmp td:first-child{font-weight:700}
+.cmp td{color:var(--soft)}
+@media (max-width:980px){.sw,.acc-cmp{grid-template-columns:1fr 1fr}.type-row{grid-template-columns:1fr}.cmp{font-size:.86rem}}
+@media (max-width:640px){.sw,.acc-cmp{grid-template-columns:1fr}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="no-js" data-root="" data-page="systeme">
+<canvas id="gl" aria-hidden="true" data-src="img/atmos-1.jpg" data-mode="inner"></canvas>
+<div id="shade"></div><div id="veil"></div><div class="grain"></div>
+
+<main>
+<section class="page-hero gut"><div class="max">
+  <span class="lab dim">Maquette · document de travail</span>
+  <h1 class="xw" style="margin-top:24px">Système graphique</h1>
+  <p>Le site reprend le système du nouveau site Progress : mêmes couleurs de base, même typographie, même grille et mêmes composants. Les deux sites se lisent comme une famille. Downtown garde son nom, son logo et une couleur d'accent qui lui est propre.</p>
+</div></section>
+
+<section class="sec gut" id="accent" data-ch="Accent" style="padding-top:24px"><div class="max">
+  <div class="sec-head"><span class="lab">01 · Accent</span><div>
+    <h2 class="xw">Couleur d'accent, à valider</h2>
+    <p>Progress utilise un bleu d'écran. Je propose pour Downtown un rouge « tally », la lampe qui signale l'enregistrement en studio et qui s'allume sur une tranche de console en lecture. Il reprend le rouge « Signal » de la maquette de Pascal (#F53220), éclairci pour rester lisible sur fond noir.</p>
+  </div></div>
+  <div class="acc-cmp" data-rv>
+    <article><span class="lab dim">Progress · existant</span><div class="chip" style="background:#2F5BFF">#2F5BFF · bleu</div><p class="dim">Barre de timecode, nœud actif, survol des boutons, nuage de points.</p></article>
+    <article><span class="lab" style="color:var(--acc-hi)">Downtown · proposition</span><div class="chip" style="background:var(--acc)" id="chipDt">#FF3B1F · rouge tally</div><p class="dim">Mêmes usages. Le nuage de points de l'ouverture passe aussi au rouge.</p></article>
+  </div>
+  <h3 class="lab" style="margin:40px 0 16px">Essayer une autre couleur sur toute la maquette</h3>
+  <div class="picker" id="picker">
+    <button type="button" data-acc="#FF3B1F" data-hi="#FF7A5E" data-rgb="255,59,31"><i style="background:#FF3B1F"></i>Rouge tally · proposé</button>
+    <button type="button" data-acc="#2FF766" data-hi="#7BFFA0" data-rgb="47,247,102"><i style="background:#2FF766"></i>Vert « Share » · maquette Pascal</button>
+    <button type="button" data-acc="#FFB020" data-hi="#FFCB66" data-rgb="255,176,32"><i style="background:#FFB020"></i>Ambre · marqueur de timeline</button>
+  </div>
+  <p class="cap">Le choix est gardé dans ce navigateur et s'applique aux autres pages de la maquette. Le nuage de points 3D reste rouge dans les deux variantes.</p>
+</div></section>
+
+<section class="sec gut" data-ch="Base"><div class="max">
+  <div class="sec-head"><span class="lab">02 · Base commune</span><div><h2 class="xw">Repris tel quel de Progress</h2></div></div>
+  <div class="sw" data-rv>
+    <div><i style="background:#000"></i><b>Fond</b><span>#000000</span></div>
+    <div><i style="background:#F4F4F1"></i><b>Encre</b><span>#F4F4F1</span></div>
+    <div><i style="background:#C9C9C4"></i><b>Texte courant</b><span>#C9C9C4</span></div>
+    <div><i style="background:#808080"></i><b>Étiquettes</b><span>#808080</span></div>
+  </div>
+  <div style="margin-top:40px" data-rv>
+    <div class="type-row"><span class="lab">Titre · Archivo 900, largeur 125</span><span class="xw" style="font-size:clamp(2rem,5vw,4rem)">Post-produits ici</span></div>
+    <div class="type-row"><span class="lab">Sous-titre · Archivo 800, largeur 118</span><span style="font-variation-settings:'wdth' 118;font-weight:800;text-transform:uppercase;font-size:1.6rem;line-height:1.05">Auditorium Dolby Atmos</span></div>
+    <div class="type-row"><span class="lab">Texte · Archivo 400, 17 px</span><span style="color:var(--soft)">Les salles se louent à l'heure ou à la journée, avec ou sans opérateur.</span></div>
+    <div class="type-row"><span class="lab">Étiquette · Archivo 600, largeur 110</span><span class="lab">Son · C02 · 400 m³</span></div>
+    <div class="type-row"><span class="lab">Information manquante</span><span><span class="tbd">[À VALIDER : description précise de ce qui manque]</span></span></div>
+  </div>
+</div></section>
+
+<section class="sec gut" data-ch="Composants"><div class="max">
+  <div class="sec-head"><span class="lab">03 · Composants</span><div><h2 class="xw">Ce qui vient de Progress, ce qui est propre à Downtown</h2>
+    <p>Le langage reste celui d'une interface de post-production. Downtown ajoute des motifs tirés de ses propres salles : la console de mixage, le banc de montage, la fiche technique.</p></div></div>
+  <table class="cmp" data-rv>
+    <thead><tr><th>Composant</th><th>Origine</th><th>Usage sur Downtown</th></tr></thead>
+    <tbody>
+      <tr><td>Nuage de points 3D</td><td>Progress</td><td>Ouverture de l'accueil, avec la photo de l'auditorium Atmos</td></tr>
+      <tr><td>Barre de timecode</td><td>Progress</td><td>Navigation par chapitres sur les pages longues</td></tr>
+      <tr><td>Chapitres numérotés et règle graduée</td><td>Progress</td><td>Toutes les pages</td></tr>
+      <tr><td>Cycle de nœuds</td><td>Progress</td><td>La méthode d'Apprendre, partagée avec Progress (cinq étapes)</td></tr>
+      <tr><td>Journal (pipeline)</td><td>Progress</td><td>Archives de l'agenda avec la participation ; recherche publiée</td></tr>
+      <tr><td>Fiche technique</td><td>Progress (« sheet »), étendue</td><td>Fiches des salles : volume, matériel, tarif</td></tr>
+      <tr><td>Tranches de console</td><td>Downtown</td><td>Les quatre portes de l'accueil, avec vumètre au survol</td></tr>
+      <tr><td>Pellicule et chutier</td><td>Downtown</td><td>Bande d'affiches et liste des films</td></tr>
+      <tr><td>Timeline de clips</td><td>Downtown</td><td>Études de cas : le parcours de Together salle par salle</td></tr>
+      <tr><td>Schéma de la maison</td><td>Downtown</td><td>Trois colonnes sur un socle, avec trois statuts</td></tr>
+      <tr><td>Index sur fond noir, listes dépliantes</td><td>Maquette de Pascal</td><td>Index des projets de Créer avec nous, matériel des salles (lot 1)</td></tr>
+    </tbody>
+  </table>
+</div></section>
+</main>
+
+<script src="assets/ds.js"></script>
+<script src="assets/gl.js"></script>
+<script>
+(function(){
+var p=document.getElementById('picker'),cur=null;
+try{cur=JSON.parse(localStorage.getItem('dt-acc-full')||'null')}catch(e){}
+function mark(){var a=cur?cur.a:'#FF3B1F';[].forEach.call(p.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',String(b.dataset.acc===a))});
+  var on=p.querySelector('[aria-pressed="true"]');document.getElementById('chipDt').textContent=a+' · '+on.textContent.split('·')[0].trim().toLowerCase()}
+p.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cur={a:b.dataset.acc,h:b.dataset.hi,r:b.dataset.rgb};
+  try{localStorage.setItem('dt-acc-full',JSON.stringify(cur))}catch(err){}window.dtApplyAcc(cur);mark()});
+mark();
+})();
+</script>
+</body>
+</html>
