@@ -1,5 +1,5 @@
-/* Downtown Studio · ouverture en image nette
-   Accueil : les photos du lieu en fondu enchaîné, avec un lent travelling, sous la phrase.
+/* Downtown Studio · image d'ouverture
+   Accueil : aucune image, l'ouverture est purement typographique.
    Pages intérieures : une bande d'image nette sous le titre.
    La page déclare toujours : <canvas id="gl" data-src="img/…jpg" data-mode="home|inner" [data-set="img/a.jpg,img/b.jpg"]> */
 (function(){
@@ -9,7 +9,7 @@ var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').mat
 var HOME=cv.dataset.mode==='home',src=cv.dataset.src,set=(cv.dataset.set||'').split(',').filter(Boolean);
 cv.remove();
 function img(u,alt){var i=new Image();i.src=u;i.alt=alt||'';i.decoding='async';return i}
-if(HOME){
+if(HOME){return;
   var host=document.querySelector('.hero');if(!host)return;
   var box=document.createElement('div');box.className='hero-media';box.setAttribute('aria-hidden','true');
   var list=[src].concat(set.filter(function(u){return u!==src})),ims=list.map(function(u){return img(u)});
