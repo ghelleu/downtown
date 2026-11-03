@@ -165,4 +165,24 @@ document.querySelectorAll('form[data-form]').forEach(function(f){f.addEventListe
   var m=f.querySelector('input[type=email]'),o=f.querySelector('.ok');
   if(m&&!/^\S+@\S+\.\S+$/.test(m.value.trim())){o.textContent='Indiquez une adresse e-mail valide.';return}
   o.textContent=f.dataset.form;f.reset()})});
+
+/* ---------- Agenda : une date passée bascule seule dans les archives ---------- */
+(function(){var up=document.querySelector('[data-upcoming]'),ar=document.querySelector('[data-archive]');if(!up||!ar)return;
+  var t=new Date();t.setHours(0,0,0,0);
+  [].slice.call(up.querySelectorAll('[data-date]')).forEach(function(e){if(new Date(e.dataset.date+'T23:59:59')<t)ar.insertBefore(e,ar.firstChild)})})();
+
+/* ---------- Flux d'échange (mentor ↔ participant), repris de Progress ---------- */
+(function(){var svg=document.getElementById('flowSvg');if(!svg)return;var NS='http://www.w3.org/2000/svg',W0=0;
+  function el(t,a,p){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(p)p.appendChild(n);return n}
+  function build(){var r=svg.getBoundingClientRect(),w=Math.round(r.width),h=Math.round(r.height);if(!w||!h||w===W0)return;W0=w;
+    svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.innerHTML='';var m=10,a,b,vert=w<520;
+    if(vert){a='M'+(w*.3)+' '+m+' C '+(w*.3)+' '+(h*.4)+', '+(w*.3)+' '+(h*.6)+', '+(w*.3)+' '+(h-m);b='M'+(w*.7)+' '+(h-m)+' C '+(w*.7)+' '+(h*.6)+', '+(w*.7)+' '+(h*.4)+', '+(w*.7)+' '+m}
+    else{a='M'+m+' '+(h*.4)+' C '+(w*.3)+' '+(h*.04)+', '+(w*.7)+' '+(h*.04)+', '+(w-m)+' '+(h*.4);b='M'+(w-m)+' '+(h*.6)+' C '+(w*.7)+' '+(h*.96)+', '+(w*.3)+' '+(h*.96)+', '+m+' '+(h*.6)}
+    var acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||'#FF3B1F';
+    el('path',{d:a,fill:'none',stroke:acc,'stroke-width':'1.2'},svg);
+    el('path',{d:b,fill:'none',stroke:'rgba(255,255,255,.55)','stroke-width':'1','stroke-dasharray':'3 5'},svg);
+    if(reduce)return;
+    [[a,acc,2.6,.65],[b,'#ffffff',3.4,.85]].forEach(function(q){for(var j=0;j<4;j++){var c=el('circle',{r:3,fill:q[1],style:'filter:drop-shadow(0 0 5px '+q[1]+')'},svg);el('animateMotion',{dur:q[2]+'s',repeatCount:'indefinite',begin:(j*q[3])+'s',path:q[0]},c)}});}
+  build();window.addEventListener('resize',function(){clearTimeout(build.t);build.t=setTimeout(build,150)});
+  new IntersectionObserver(function(e){if(e[0].isIntersecting)build()}).observe(svg);})();
 })();
