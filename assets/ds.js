@@ -27,6 +27,7 @@ hdr.innerHTML='<div class="gut max"><div class="bar">'+
   '<nav class="links" aria-label="Navigation principale">'+MAIN.map(function(m){return '<a href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+'</nav>'+
   '<nav class="subnav" aria-label="Navigation secondaire">'+SEC.map(function(m){return '<a class="hide-m" href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+
   '<a class="lang" href="#" data-later="Version anglaise · plus tard" title="Version anglaise prévue plus tard"><b>FR</b> / EN</a>'+
+  '<button class="theme-sw" type="button" data-theme-sw><i></i><span></span></button>'+
   '<a class="member" href="https://access.downtownstudio.ch" target="_blank" rel="noopener">Espace membres ↗</a></nav>'+
   '<button class="menu-btn" id="menuOpen" type="button" aria-expanded="false" aria-controls="overlay">Menu <i></i></button>'+
   '</div><div class="mega" id="mega" hidden></div><div class="tcbar" id="tcbar" aria-label="Chapitres"><div class="tc-now" id="tcNow"></div><div class="tc-track" id="tcTrack"><div class="tc-head" id="tcHead"></div></div><div class="tc-code" id="tcCode">00:00:00:00</div></div></div>';
@@ -39,10 +40,20 @@ ov.innerHTML='<button class="menu-btn close" id="menuClose" type="button" style=
   MAIN.map(function(m){var d=MENU[m[2]];if(!d)return '<a href="'+R+m[0]+'">'+m[1]+'</a>';
     return '<details class="ov-sec"><summary>'+m[1]+'</summary><div class="ov-body"><a class="ov-top" href="'+R+m[0]+'">Voir la page '+m[1]+' →</a>'+
       d.groups.map(function(g){return '<div class="ov-g"><span class="lab dim">'+g[0]+'</span>'+g[1].map(function(l){return '<a href="'+href(l[1])+'"'+ext(l[1])+'>'+l[0]+'</a>'}).join('')+'</div>'}).join('')+'</div></details>'}).join('')+
-  '<div class="sec-o">'+SEC.map(function(m){return '<a href="'+R+m[0]+'">'+m[1]+'</a>'}).join('')+'<a href="https://access.downtownstudio.ch">Espace membres ↗</a></div>';
+  '<div class="sec-o">'+SEC.map(function(m){return '<a href="'+R+m[0]+'">'+m[1]+'</a>'}).join('')+'<a href="https://access.downtownstudio.ch">Espace membres ↗</a><button class="theme-sw" type="button" data-theme-sw><i></i><span></span></button></div>';
 document.body.insertBefore(ov,hdr.nextSibling);
 document.getElementById('menuOpen').addEventListener('click',function(){ov.hidden=false;this.setAttribute('aria-expanded','true')});
 document.getElementById('menuClose').addEventListener('click',function(){ov.hidden=true;document.getElementById('menuOpen').setAttribute('aria-expanded','false')});
+
+/* ---------- Thème clair / sombre (mémorisé par version du site) ---------- */
+(function(){
+  var html=document.documentElement,key='dt-theme:'+location.pathname.split('/')[1];
+  function cur(){return html.dataset.theme||getComputedStyle(html).getPropertyValue('--theme').trim()||'dark'}
+  function label(){var c=cur();[].forEach.call(document.querySelectorAll('[data-theme-sw] span'),function(s){s.textContent=c==='dark'?'Clair':'Sombre'});
+    [].forEach.call(document.querySelectorAll('[data-theme-sw]'),function(b){b.setAttribute('aria-label',c==='dark'?'Passer en thème clair':'Passer en thème sombre')})}
+  document.addEventListener('click',function(e){if(!e.target.closest('[data-theme-sw]'))return;var n=cur()==='dark'?'light':'dark';html.dataset.theme=n;try{localStorage.setItem(key,n)}catch(err){}label()});
+  label();
+})();
 
 /* ---------- Pied de page : les quatre portes, puis la maison ---------- */
 var ft=document.createElement('footer');ft.className='site';
@@ -69,11 +80,12 @@ document.body.appendChild(ft);
   var stage=el.querySelector('.iso-stage'),world=el.querySelector('.iso-world'),out=el.querySelector('[data-iso-info]'),def=out.textContent;
   var btns=el.querySelectorAll('[data-view]'),rz=-40,rx=56,live=false,t0=0,hold=0,moved=false;
   function fit(){var w=stage.clientWidth,iso=el.dataset.mode==='iso';
-    var s=iso?(w<700?w/800:Math.min(w/1150,1.3)):Math.min(w/680,1.15),h=iso?Math.round(720*s)+80:Math.round(720*s)+20;
-    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?140*s:0)+'px')}
+    var s=iso?(w<700?w/800:Math.min(w/1150,1.3)):Math.min(w/860,1.2),h=iso?Math.round(782*s)+60:Math.round(640*s)+20;
+    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?121*s:0)+'px')}
   function mode(m){el.dataset.mode=m;el.classList.remove('live');live=false;
     [].forEach.call(btns,function(b){b.setAttribute('aria-pressed',String(b.dataset.view===m))});
-    if(m==='iso'){rz=-40;rx=56;el.style.removeProperty('--rz');el.style.removeProperty('--rx')}
+    rz=-40;rx=56;el.style.removeProperty('--rz');el.style.removeProperty('--rx');
+    [].forEach.call(el.querySelectorAll('.bldg.open'),function(b){b.classList.remove('open')});
     fit();hold=Date.now()+1600}
   [].forEach.call(btns,function(b){b.addEventListener('click',function(){mode(b.dataset.view)})});
   /* Info au survol, étage en surbrillance */

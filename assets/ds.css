@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap");
+/* Version 2 · famille Cinetic et Progress. Thème sombre par défaut, thème clair au choix. */
+:root{--theme:dark}
+html[data-theme="light"]{--bg:#FFFFFF; --ink:#000000; --ink-rgb:0,0,0; --soft:#333333; --dim:#767676;
+  --line:rgba(0,0,0,.14); --line2:rgba(0,0,0,.42); --panel:#FFFFFF; --card:#FFFFFF; --card2:#F2F2F2; color-scheme:light}
 /* Downtown Studio · système graphique
    Même famille que Cinetic Creatives et le nouveau site Progress : fond noir, grotesque élargie
    en capitales grasses pour les titres (Archivo élargi, comme Progress), texte courant en Archivo.
@@ -1327,6 +1332,29 @@ section.noir{margin-inline:0}
 /* Nom flottant au-dessus du point le plus haut */
 .bb{transform:translate3d(calc(var(--tx) + var(--w) / 2),calc(var(--ty) + var(--d) / 2),calc(var(--top) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * var(--rz))) rotateX(calc(-1 * var(--rx)))}
 
+/* Logo en escalier (DOWNTOWN, puis STUDIO décalé dessous) */
+.logo.dt img{height:40px;width:auto}
+footer.site .logo.dt img{height:46px}
+@media (max-width:640px){.logo.dt img{height:34px}}
+/* Les maisons posées sur les blocs du bâtiment : coordonnées locales, rotation du bloc sud */
+.bldg{inset:auto;left:0;top:0;width:var(--w);height:var(--d);transform:translate3d(var(--tx),var(--ty),0) rotateZ(var(--rot,0deg))}
+.roof{transform:translate3d(0,0,1px)}
+.shadow{transform:translate3d(0,0,1px)}
+.bb{transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx)))}
+.lot{outline-width:8px}
+.rh b{font-size:min(22px,calc(var(--w) / 7.2))}
+.roof{padding:6px;gap:3px}
+.roof ol{gap:1px}
+.roof li a{padding:1px 5px;font-size:9.5px;line-height:1.35}
+
+/* La maquette isométrique reste blanche, quel que soit le thème de la page */
+.iso-world{--bg:#FFFFFF;--ink:#000000;--ink-rgb:0,0,0;--dim:#767676;--soft:#333;color:#000}
+/* Sélecteur de thème (clair / sombre) */
+.theme-sw{font:inherit;background:none;border:1px solid var(--line2);color:var(--ink);cursor:pointer;padding:6px 10px;display:inline-flex;align-items:center;gap:8px;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.theme-sw i{width:12px;height:12px;border-radius:50%;border:1.5px solid currentColor;background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.theme-sw:hover{border-color:var(--ink)}
+.overlay .theme-sw{margin-top:8px}
 /* =====================================================================
    Système de famille (Cinetic Creatives, Progress, Downtown Studio)
    Fond noir, titres en capitales élargies grasses, texte fin, images nettes.
@@ -1390,7 +1418,6 @@ footer.site{border-top:1px solid var(--line)}
 .iso-bar,.iso-info{border-color:var(--line2)}
 .iso-list{border-color:var(--line2)}
 .iso-stage{background-color:#060606;background-image:radial-gradient(circle,rgba(255,255,255,.16) 1px,transparent 1.2px)}
-.iso-world{--bg:#FFFFFF;--ink:#000000;--ink-rgb:0,0,0;--dim:#767676;--soft:#333;color:#000}
 .iso-sw button{border-color:var(--line2);background:transparent;color:var(--ink);font-family:var(--font);font-weight:600;font-size:.7rem;letter-spacing:.12em}
 .iso-sw button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .iso-leg{font-family:var(--font);font-weight:500;font-size:.68rem;letter-spacing:.12em}
@@ -1424,3 +1451,10 @@ nav.subnav a{font-variation-settings:"wdth" 105;font-weight:500;font-size:.68rem
 @media (max-width:640px){.hero{padding-top:120px}}
 /* Pages intérieures : ouverture en typographie pure */
 .page-media{display:none!important}
+/* Thème clair de la version 2 (passe après la couche de famille) */
+html[data-theme="light"] header.top,html[data-theme="light"] header.top.solid,html[data-theme="light"] header.top.mega-on{background:rgba(255,255,255,.94)}
+html[data-theme="light"] .logo.dt img{filter:invert(1)}
+html[data-theme="light"] .iso-stage{background-color:#EFEFEF;background-image:radial-gradient(circle,rgba(0,0,0,.16) 1px,transparent 1.2px)}
+html[data-theme="light"] .hero-stats div{background:var(--bg)}
+html[data-theme="light"] .toast,html[data-theme="light"] .cookie{background:#000;color:#fff}
+html[data-theme="light"] .cookie p{color:#fff}html[data-theme="light"] .cookie .btn.line{color:#fff;border-color:#fff}

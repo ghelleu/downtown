@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Système graphique</title>
+<meta name="description" content="La charte Base Design appliquée au site Downtown Studio : couleurs, typographies, mosaïque de pixels et composants.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>try{var k="dt-theme:"+location.pathname.split("/")[1],t=localStorage.getItem(k);if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="assets/ds.css">
+<style>
+.sw{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) repeat(4,minmax(0,.6fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sw div{background:var(--bg);padding:16px;display:grid;gap:8px;align-content:start}
+.sw i{display:block;height:120px;border:1px solid var(--line)}
+.sw b{font-weight:500}
+.sw span{font-size:.86rem;color:var(--soft)}
+.type-row{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.type-row>.lab{color:var(--dim)}
+.duo-type{display:grid;gap:0;font-size:clamp(2.6rem,7vw,6.4rem);line-height:.92}
+.duo-type .px{font-size:1em}
+.duo-type .xw{font-size:1em}
+.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+.cmp th,.cmp td{text-align:left;padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp th{font-family:var(--px);font-weight:300;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;color:var(--dim)}
+.cmp td:first-child{font-weight:500}
+.cmp td{color:var(--soft)}
+.pairs-v{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--ink);border:1px solid var(--ink)}
+.pairs-v div{padding:var(--pad);display:grid;gap:12px;align-content:start;min-height:220px}
+.pairs-v div:first-child{background:var(--bg)}
+.pairs-v div:last-child{background:var(--ink);color:var(--bg)}
+.pairs-v .px{font-size:clamp(1.6rem,3vw,2.6rem)}
+@media (max-width:980px){.sw{grid-template-columns:1fr 1fr}.type-row{grid-template-columns:1fr}.cmp{font-size:.86rem}.pairs-v{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="no-js" data-root="" data-page="systeme">
+<canvas id="gl" aria-hidden="true" data-src="img/atmos-1.jpg" data-mode="inner"></canvas>
+
+<main>
+<section class="page-hero gut"><div class="max">
+  <span class="lab dim">Maquette · document de travail</span>
+  <h1 class="xw" style="margin-top:24px">Système graphique</h1>
+  <p>Le site reprend la charte que Base Design a dessinée pour Freestudios (présentation « Branding » du 02.02.23) : une mise en page en noir et blanc et des images construites par pixels. Downtown Studio garde son nom et son logo. Le symbole « F » auto-généré appartient à Freestudios et n'est pas repris.</p>
+</div></section>
+
+<section class="sec gut" data-ch="Deux registres" style="padding-top:24px"><div class="max">
+  <div class="sec-head"><span class="lab">01 · Deux registres</span><div><h2 class="xw">Le cadre en noir et blanc, la vie dans les images</h2>
+    <p>La charte oppose deux registres. Le site applique le premier à la mise en page et laisse le second aux photos, aux affiches et à la mosaïque.</p></div></div>
+  <div class="pairs-v" data-rv>
+    <div><span class="lab dim">Mise en page</span><span class="px">Binaire, clair, rationnel</span><p class="dim" style="margin:0">Fond blanc, blocs noirs et filets fins, sans dégradé.</p></div>
+    <div><span class="lab" style="color:#8C8C8C">Images</span><span class="px">Vibrant, brut, sans filtre</span><p style="margin:0;color:#CFCFCF">Portraits en couleur et en noir et blanc, mélangés.</p></div>
+  </div>
+</div></section>
+
+<section class="sec gut" data-ch="Couleurs"><div class="max">
+  <div class="sec-head"><span class="lab">02 · Couleurs</span><div><h2 class="xw">Noir et blanc, puis quatre couleurs</h2>
+    <p>Valeurs relevées sur la planche couleur de la présentation. Les quatre couleurs restent ponctuelles : cases de la mosaïque, bandeau du fonds genevois (bleu glacier), liens entre résidents sur l'organigramme et marques à valider (rouge).</p></div></div>
+  <div class="sw" data-rv>
+    <div><i style="background:#000"></i><b>Noir</b><span>#000000 · fond des blocs, texte</span></div>
+    <div><i style="background:#fff"></i><b>Blanc</b><span>#FFFFFF · fond des pages</span></div>
+    <div><i style="background:#E6483A"></i><b>Rouge</b><span>#E6483A</span></div>
+    <div><i style="background:#BFC9D6"></i><b>Bleu glacier</b><span>#BFC9D6</span></div>
+    <div><i style="background:#005F7B"></i><b>Pétrole</b><span>#005F7B</span></div>
+    <div><i style="background:#905F38"></i><b>Brun</b><span>#905F38</span></div>
+  </div>
+</div></section>
+
+<section class="sec gut" data-ch="Typographies"><div class="max">
+  <div class="sec-head"><span class="lab">03 · Typographies</span><div><h2 class="xw">Alias Rough et Neue Montreal</h2>
+    <p>La charte associe RT Alias Rough en Light, une linéale au contour pixellisé, et PP Neue Montreal en Medium et Bold. La maquette les affiche quand elles sont installées sur l'ordinateur. Ailleurs, elle les remplace par Inter Tight, aux proportions proches.</p></div></div>
+  <div class="duo-type" data-rv>
+    <span class="px">Post-produits</span>
+    <span class="xw">à Genève</span>
+  </div>
+  <div style="margin-top:40px" data-rv>
+    <div class="type-row"><span class="lab">Titre · Neue Montreal Medium</span><span class="xw" style="font-size:clamp(2rem,5vw,4rem)">Le lieu où Genève fabrique ses récits</span></div>
+    <div class="type-row"><span class="lab">Accroche · Alias Rough Light, capitales</span><span class="px" style="font-size:clamp(1.4rem,3vw,2.4rem)">Post-production, expériences, formation</span></div>
+    <div class="type-row"><span class="lab">Texte · Neue Montreal, 17 px</span><span style="color:var(--soft)">Les salles se louent à l'heure ou à la journée, avec ou sans opérateur.</span></div>
+    <div class="type-row"><span class="lab">Étiquette · Alias Rough Light</span><span class="lab">Son · C02 · 400 m³</span></div>
+    <div class="type-row"><span class="lab">Bouton</span><span class="actions"><a class="btn" href="produire/index.html">Réserver une salle <span aria-hidden="true">→</span></a><a class="btn line" href="creer/films/index.html">Voir les films</a></span></div>
+    <div class="type-row"><span class="lab">Licences</span><span><span class="tbd" data-who="Pascal">[À VALIDER : licences web de PP Neue Montreal (Pangram Pangram) et RT Alias Rough (Razzia Type) pour le site en ligne]</span></span></div>
+    <div class="type-row"><span class="lab">Information manquante</span><span><span class="tbd" data-who="exemple">[À VALIDER : description précise de ce qui manque]</span></span></div>
+  </div>
+</div></section>
+
+<section class="sec gut noir" data-ch="Mosaïque"><div class="max">
+  <div class="sec-head"><span class="lab">04 · Mosaïque</span><div><h2 class="xw">L'image se construit par pixels</h2>
+    <p>Dans la présentation, le symbole se génère sur une grille dont on règle la graisse, l'affinage de la trame, la hauteur et la largeur, et les portraits passent du flou de pixels à la photo nette. Le site en tire une mosaïque : en haut de chaque page, la photo de la page apparaît en gros pixels puis s'affine, et des aplats noirs, blancs et de couleur s'y déplacent. La trame grossit sous le pointeur.</p></div></div>
+</div></section>
+
+<section class="sec gut" data-ch="Composants"><div class="max">
+  <div class="sec-head"><span class="lab">05 · Composants</span><div><h2 class="xw">Ce qui change par rapport à la version précédente</h2>
+    <p>La structure des pages et les contenus ne bougent pas. Seule leur présentation passe à la charte Base Design.</p></div></div>
+  <table class="cmp" data-rv>
+    <thead><tr><th>Élément</th><th>Avant (système Progress)</th><th>Maintenant (charte Base Design)</th></tr></thead>
+    <tbody>
+      <tr><td>Fond</td><td>Noir, photo en nuage de points 3D</td><td>Blanc, avec des blocs noirs pour les films, Together, la lettre et le pied de page</td></tr>
+      <tr><td>Ouverture des pages</td><td>Nuage de points en plein écran</td><td>Mosaïque de pixels de la photo de la page</td></tr>
+      <tr><td>Titres</td><td>Archivo Black, capitales élargies</td><td>Neue Montreal Medium, bas de casse, approche serrée</td></tr>
+      <tr><td>Étiquettes, boutons</td><td>Archivo, capitales espacées</td><td>Alias Rough Light, capitales</td></tr>
+      <tr><td>Couleur d'accent</td><td>Rouge « tally » #FF3B1F à valider</td><td>Aucune : noir et blanc, et les quatre couleurs de la charte en touches</td></tr>
+      <tr><td>Survol</td><td>Accent rouge et halo lumineux</td><td>Inversion noir et blanc</td></tr>
+      <tr><td>Barre de timecode, vumètres, perforations de pellicule</td><td>Présents</td><td>Retirés</td></tr>
+      <tr><td>Boutons</td><td>Rectangles droits</td><td>Coins arrondis, triangle pixel sur les boutons secondaires</td></tr>
+      <tr><td>Logo</td><td>Downtown Studio</td><td>Downtown Studio, en noir sur les pages blanches</td></tr>
+    </tbody>
+  </table>
+</div></section>
+</main>
+
+<script src="assets/pages.js"></script>
+<script src="assets/ds.js"></script>
+<script src="assets/gl.js"></script>
+</body>
+</html>
